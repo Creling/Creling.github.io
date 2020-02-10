@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="某大学生的自娱自乐"><title>修改Linux终端提示符的颜色 | 零之始初</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><meta name="generator" content="Hexo 4.1.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">修改Linux终端提示符的颜色</h1><a id="logo" href="/.">零之始初</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">修改Linux终端提示符的颜色</h1><div class="post-meta">Feb 21, 2019<span> | </span><span class="category"><a href="/categories/Linux-amp-VPS/">Linux &amp;amp; VPS</a></span></div><div class="post-content"><h3 id="1-了解PS1"><a href="#1-了解PS1" class="headerlink" title="1.了解PS1:"></a>1.了解PS1:</h3><p>　　PS1是Linux终端用户的一个环境变量，用来定义命令行提示符的参数。 　　在终端输入命令：<code>echo $PS1</code> 可得到当前PS1的定义值：</p>
+<h3 id="2-PS1的常用参数以及含义"><a href="#2-PS1的常用参数以及含义" class="headerlink" title="2.PS1的常用参数以及含义:"></a>2.PS1的常用参数以及含义:</h3><p>参数</p>
+<p>含义</p>
+<p>　　\d</p>
+<p>代表日期，格式为weekday month date，例如：”Mon Aug 1”</p>
+<p>　　\H</p>
+<p>完整的主机名称</p>
+<p>　　\h</p>
+<p>仅取主机名中的第一个名字</p>
+<p>　　\t</p>
+<p>显示时间为24小时格式，如：HH：MM：SS</p>
+<p>　　\T</p>
+<p>显示时间为12小时格式</p>
+<p>　　\A</p>
+<p>显示时间为24小时格式：HH：MM</p>
+<p>　　\u</p>
+<p>当前用户的账号名称</p>
+<p>　　\v</p>
+<p>BASH的版本信息</p>
+<p>　　\w</p>
+<p>完整的工作目录名称</p>
+<p>　　\W</p>
+<p>利用basename取得工作目录名称，只显示最后一个目录名</p>
+<p>　　#</p>
+<p>下达的第几个命令</p>
+<p>　　\$</p>
+<p>提示字符，如果是root用户，提示符为 # ，普通用户则为 $</p>
+<p>所以linux默认的命令行提示信息的格式 　　 <code>PS1=&#39;[\u@\h \W]\$ &#39;</code><br>意思就是：</p>
+<pre><code>[当前用户的账号名称@主机名的第一个名字 工作目录的最后一层目录名]#</code></pre><h3 id="3-颜色设置参数"><a href="#3-颜色设置参数" class="headerlink" title="3.颜色设置参数"></a>3.颜色设置参数</h3><p>　　在PS1中设置字符颜色的格式为： <code>\[\e[F;Bm\]........\[\e[0m\]</code> 其中“F“为字体颜色，编号为30-37，“B”为背景颜色，编号为40-47,<code>\[\e[0m\]</code>作为颜色设定的结束。</p>
+<h4 id="颜色对照表："><a href="#颜色对照表：" class="headerlink" title="颜色对照表："></a>颜色对照表：</h4><p>F</p>
+<p>B</p>
+<p>颜色</p>
+<p>30</p>
+<p>40</p>
+<p>黑色</p>
+<p>31</p>
+<p>41</p>
+<p>红色</p>
+<p>32</p>
+<p>42</p>
+<p>绿色</p>
+<p>33</p>
+<p>43</p>
+<p>黄色</p>
+<p>34</p>
+<p>44</p>
+<p>蓝色</p>
+<p>35</p>
+<p>45</p>
+<p>紫红色</p>
+<p>36</p>
+<p>46</p>
+<p>青蓝色</p>
+<p>37</p>
+<p>47</p>
+<p>白色</p>
+<p>只需将对应数字套入设置格式中即可。 比如要设置命令行的格式为绿字黑底([\e[32;40m])，显示当前用户的账号名称(\u)、主机的第一个名字(\h)、完整的当前工作目录名称(\w)、24小时格式时间(\t)，可以直接在命令行键入如下命令：</p>
+<pre><code>PS1=&apos;[\[\e[32;40m\]\u@\h \w \t]$ \[\e[0m\]&apos;</code></pre><p>推荐配色</p>
+<pre><code>PS1=&quot;\[\e[37;40m\][\[\e[32;40m\]\u\[\e[37;40m\]@\h \[\e[36;40m\]\w\[\e[0m\]]\\$ &quot;</code></pre><p>3.修改.bashrc文件,永久保存命令行样式. 　　上面的设置的作用域只有当前终端的登陆有效，关闭终端或退出登录即刻失效。要想永久性的保存设置，需要修改.bashrc配置文件。 　　键入命令：</p>
+<pre><code>vim ~/.bashrc</code></pre><p>在底部加入这一行:</p>
+<pre><code>PS1=&quot;\[\e[37;40m\][\[\e[32;40m\]\u\[\e[37;40m\]@\h \[\e[36;40m\]\w\[\e[0m\]]\\$ &quot; </code></pre><p>　　保存退出。 　　重新加载bash配置文件:</p>
+<pre><code>source ~/.bashrc</code></pre><p>　　即可立即并永久生效了。</p>
+</div><div class="tags"></div><div class="post-nav"><a class="pre" href="/2019/03/04/%E8%A7%A3%E5%86%B3CentOS7%E4%B8%8BNetworkManager%E4%B8%AD%E9%83%A8%E5%88%86%E7%AB%AF%E5%8F%A3%E4%B8%BAumanaged%E7%8A%B6%E6%80%81%E8%BF%99%E4%B8%80%E9%97%AE%E9%A2%98/">解决CentOS7下NetworkManager中部分端口为umanaged状态这一问题</a><a class="next" href="/2019/02/20/docker%E5%AE%89%E8%A3%85nginx/">docker安装nginx</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-amp-VPS/">Linux &amp; VPS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vps/">vps</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/django/" style="font-size: 15px;">django</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/vps/" style="font-size: 15px;">vps</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/01/27/%E6%95%91%E6%8F%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%8C%82%E8%BD%BD%E5%8E%9F%E7%B3%BB%E7%BB%9F/">救援模式下挂载原系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/shell%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/">shell的字符串处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/H-264-10bit%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%9D%91/">H.264-10bit编码的一个小坑及解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/14/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%EF%BC%9A/">问题解决："/usr/bin/env: node: No such file or director"</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/12/Debian%E4%B8%8B%E5%AE%89%E8%A3%85%E6%96%B0%E5%86%85%E6%A0%B8%E5%8F%8A%E6%9B%B4%E6%8D%A2%E9%BB%98%E8%AE%A4%E5%86%85%E6%A0%B8/">Debian下安装新内核及更换默认内核</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/10/%E4%BD%BFNginx%E5%90%8C%E6%97%B6%E7%9B%91%E5%90%ACipv4%E5%92%8Cipv6%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/">配置双栈网站——使Nginx同时监听ipv4/ipv6</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/%E5%88%A9%E7%94%A8shadowsocks%E6%90%AD%E5%BB%BA6to4%E9%9A%A7%E9%81%93/">利用shadowsocks搭建6to4隧道</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/27/%E3%80%90Django%E3%80%91%E5%A6%82%E4%BD%95%E5%B0%86QuerySet%E8%BD%AC%E4%B8%BAdict/">将QuerySet转为dict</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/04/Dell%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%87%A0%E6%AC%BEraid%E5%B7%A5%E5%85%B7/">Dell服务器的几款raid工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/05/xfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A7%BB%E5%8A%A8%E5%88%86%E5%8C%BA/">xfs文件系统移动分区</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">零之始初.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

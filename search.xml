@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>救援模式下挂载原系统</title>
+      <link href="/2020/01/27/%E6%95%91%E6%8F%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%8C%82%E8%BD%BD%E5%8E%9F%E7%B3%BB%E7%BB%9F/"/>
+      <url>/2020/01/27/%E6%95%91%E6%8F%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%8C%82%E8%BD%BD%E5%8E%9F%E7%B3%BB%E7%BB%9F/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要</strong> 提供了在救援模式下挂载原有系统的方法</p><a id="more"></a><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>当系统损坏，正常途径下无法进入系统时，可以利用这种方法进入系统。</p><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>其中 <code>sda2</code>是原系统<code>/</code>分区，<code>sda1</code>是原系统<code>/boot</code>分区</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda2 /mnt</span><br><span class="line">mount /dev/sda1 /mnt/boot</span><br><span class="line">mount --bind /sys /mnt/sys</span><br><span class="line">mount --bind /proc /mnt/proc</span><br><span class="line">mount --bind /dev /mnt/dev</span><br><span class="line">chroot /mnt</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>shell的字符串处理</title>
+      <link href="/2020/01/17/shell%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/"/>
+      <url>/2020/01/17/shell%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要</strong> 借助<code>${expression}</code>表达式进行字符串操作的一些方法</p><a id="more"></a><h2 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;parameter:-word&#125;</span> <span class="comment"># $&#123;parameter&#125;为空时用$&#123;word&#125;替换</span></span><br><span class="line"><span class="variable">$&#123;parameter:=word&#125;</span> <span class="comment"># $&#123;parameter&#125;为空时用$&#123;word&#125;替换，并将值赋给$parameter变量</span></span><br><span class="line"><span class="variable">$&#123;parameter:?word&#125;</span> <span class="comment"># $&#123;parameter&#125;为空时,以标准错误的方式输出$&#123;word&#125;</span></span><br><span class="line"><span class="variable">$&#123;parameter:+word&#125;</span> <span class="comment"># $&#123;parameter&#125;不为空时用$&#123;word&#125;替换替换</span></span><br></pre></td></tr></table></figure><h2 id="截取"><a href="#截取" class="headerlink" title="截取"></a>截取</h2><ol><li><code>${parameter%word}</code><br>最小限度从后面截去<code>${word}</code>，也就是说，从右向左，截去第一个出现的<code>${word}</code>及其右边的内容，保留左边的内容。</li><li><code>${parameter%%word}</code><br>最大限度从后面截去<code>${word}</code>，也就是说，从右向左，截去最后一个出现的<code>${word}</code>及其右边的内容，保留左边的内容。</li><li><code>${parameter#word}</code><br>最小限度从前面截去<code>${word}</code>，也就是说，从左向右，截去第一个出现的<code>${word}</code>及其左边的内容，保留右边的内容。  </li><li><code>${parameter##word}</code><br>最大限度从前面截去<code>${word}</code>，也就是说，从左向右，截去最后一个出现的<code>${word}</code>及其左边的内容，保留右边的内容。  </li><li><code>${parameter:offset}</code>或<code>${parameter:offset:length}</code><br>从偏移量<code>${offset}</code>开始获得子序列，如果指定了<code>${length}</code>，则返回指定长度的子序列。当<code>${offset}</code>为负数时，为了避免和<code>${parameter:-word}</code>冲突，往往在<code>:</code>后加一个<code>0</code>或者空格。</li></ol><h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;#parameter&#125;</span> <span class="comment"># 获取字符串的长度</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> shell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>H.264-10bit编码的一个小坑及解决方案</title>
+      <link href="/2019/12/17/H-264-10bit%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%9D%91/"/>
+      <url>/2019/12/17/H-264-10bit%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%9D%91/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要</strong> 前两天在向我的网站上传动漫，发现一部H.264格式的视频无法在Firefox上正常播放，但是可以在Chrome上正常播放，百思不得其解。最终自仔细比对了视频流的格式，发现原因在于那部动漫是10bit编码，而Firefox并不支持10bit编码的H.264.</p><h2 id="问题根源"><a href="#问题根源" class="headerlink" title="问题根源"></a>问题根源</h2><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[STREAM]</span></span><br><span class="line"><span class="attr">index</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">codec_name</span>=h264</span><br><span class="line"><span class="attr">codec_long_name</span>=H.<span class="number">264</span> / AVC / MPEG-<span class="number">4</span> AVC / MPEG-<span class="number">4</span> part <span class="number">10</span></span><br><span class="line"><span class="attr">profile</span>=High <span class="number">10</span></span><br><span class="line"><span class="attr">codec_type</span>=video</span><br><span class="line"><span class="attr">codec_time_base</span>=<span class="number">1001</span>/<span class="number">48000</span></span><br><span class="line"><span class="attr">codec_tag_string</span>=avc1</span><br><span class="line"><span class="attr">codec_tag</span>=<span class="number">0</span>x31637661</span><br><span class="line"><span class="attr">width</span>=<span class="number">1920</span></span><br><span class="line"><span class="attr">height</span>=<span class="number">1080</span></span><br><span class="line"><span class="attr">coded_width</span>=<span class="number">1920</span></span><br><span class="line"><span class="attr">coded_height</span>=<span class="number">1088</span></span><br><span class="line"><span class="attr">has_b_frames</span>=<span class="number">2</span></span><br><span class="line"><span class="attr">sample_aspect_ratio</span>=<span class="number">1</span>:<span class="number">1</span></span><br><span class="line"><span class="attr">display_aspect_ratio</span>=<span class="number">16</span>:<span class="number">9</span></span><br><span class="line"><span class="attr">pix_fmt</span>=yuv420p10le</span><br><span class="line"><span class="attr">level</span>=<span class="number">40</span></span><br><span class="line"><span class="attr">color_range</span>=unknown</span><br><span class="line"><span class="attr">color_space</span>=unknown</span><br><span class="line"><span class="attr">color_transfer</span>=unknown</span><br><span class="line"><span class="attr">color_primaries</span>=unknown</span><br><span class="line"><span class="attr">chroma_location</span>=left</span><br><span class="line"><span class="attr">field_order</span>=unknown</span><br><span class="line"><span class="attr">timecode</span>=N/A</span><br><span class="line"><span class="attr">refs</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">is_avc</span>=<span class="literal">true</span></span><br><span class="line"><span class="attr">nal_length_size</span>=<span class="number">4</span></span><br><span class="line"><span class="attr">id</span>=N/A</span><br><span class="line"><span class="attr">r_frame_rate</span>=<span class="number">24000</span>/<span class="number">1001</span></span><br><span class="line"><span class="attr">avg_frame_rate</span>=<span class="number">24000</span>/<span class="number">1001</span></span><br><span class="line"><span class="attr">time_base</span>=<span class="number">1</span>/<span class="number">24000</span></span><br><span class="line"><span class="attr">start_pts</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">start_time</span>=<span class="number">0.000000</span></span><br><span class="line"><span class="attr">duration_ts</span>=<span class="number">36984948</span></span><br><span class="line"><span class="attr">duration</span>=<span class="number">1541.039500</span></span><br><span class="line"><span class="attr">bit_rate</span>=<span class="number">1244781</span></span><br><span class="line"><span class="attr">max_bit_rate</span>=N/A</span><br><span class="line"><span class="attr">bits_per_raw_sample</span>=<span class="number">10</span></span><br><span class="line"><span class="attr">nb_frames</span>=<span class="number">36948</span></span><br><span class="line"><span class="attr">nb_read_frames</span>=N/A</span><br><span class="line"><span class="attr">nb_read_packets</span>=N/A</span><br><span class="line">DISPOSITION:default=1</span><br><span class="line">DISPOSITION:dub=0</span><br><span class="line">DISPOSITION:original=0</span><br><span class="line">DISPOSITION:comment=0</span><br><span class="line">DISPOSITION:lyrics=0</span><br><span class="line">DISPOSITION:karaoke=0</span><br><span class="line">DISPOSITION:forced=0</span><br><span class="line">DISPOSITION:hearing_impaired=0</span><br><span class="line">DISPOSITION:visual_impaired=0</span><br><span class="line">DISPOSITION:clean_effects=0</span><br><span class="line">DISPOSITION:attached_pic=0</span><br><span class="line">DISPOSITION:timed_thumbnails=0</span><br><span class="line">TAG:language=und</span><br><span class="line">TAG:handler_name=VideoHandler</span><br><span class="line"><span class="section">[/STREAM]</span></span><br></pre></td></tr></table></figure><p>关键点有两条</p><ul><li><code>profile=High 10</code></li><li><code>pix_fmt=yuv420p10le</code>  </li></ul><p>都说明这是10bit编码的视频。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>发现问题后解决起来也就容易了，只需要将10bit编码转换为8bit编码，在ffmpeg参数中添加<code>-pix_fmt yuv420p</code>即可。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>问题解决：&quot;/usr/bin/env: node: No such file or director&quot;</title>
+      <link href="/2019/12/14/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%EF%BC%9A/"/>
+      <url>/2019/12/14/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%EF%BC%9A/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要</strong> 解决nodejs运行环境配置时<code>/usr/bin/env: node: No such file or director</code>这一问题。</p><a id="more"></a><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p><code>/usr/bin/node</code>不存在</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s <span class="string">"<span class="variable">$(which node)</span>"</span> /usr/bin/node</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Debian下安装新内核及更换默认内核</title>
+      <link href="/2019/12/12/Debian%E4%B8%8B%E5%AE%89%E8%A3%85%E6%96%B0%E5%86%85%E6%A0%B8%E5%8F%8A%E6%9B%B4%E6%8D%A2%E9%BB%98%E8%AE%A4%E5%86%85%E6%A0%B8/"/>
+      <url>/2019/12/12/Debian%E4%B8%8B%E5%AE%89%E8%A3%85%E6%96%B0%E5%86%85%E6%A0%B8%E5%8F%8A%E6%9B%B4%E6%8D%A2%E9%BB%98%E8%AE%A4%E5%86%85%E6%A0%B8/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要</strong> 介绍了Debian下安装新内核及更换默认内核的方法</p><a id="more"></a><h2 id="安装新内核"><a href="#安装新内核" class="headerlink" title="安装新内核"></a>安装新内核</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -i *deb</span><br></pre></td></tr></table></figure><h2 id="修改默认内核"><a href="#修改默认内核" class="headerlink" title="修改默认内核"></a>修改默认内核</h2><ol><li><p>查看当前启动菜单</p><figure class="highlight ini"><figcaption><span>/boot/grub/grub.cfg</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># DO NOT EDIT THIS FILE</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># It is automatically generated by grub-mkconfig using templates</span></span><br><span class="line"><span class="comment"># from /etc/grub.d and settings from /etc/default/grub</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### BEGIN /etc/grub.d/00_header ###</span></span><br><span class="line">if [ -s $prefix/grubenv ]; then</span><br><span class="line">  set have_grubenv=true</span><br><span class="line">  load_env</span><br><span class="line">fi</span><br><span class="line">if [ "$&#123;next_entry&#125;" ] ; then</span><br><span class="line">   set default="$&#123;next_entry&#125;"</span><br><span class="line">   set next_entry=</span><br><span class="line">   save_env next_entry</span><br><span class="line">   set boot_once=true</span><br><span class="line">else</span><br><span class="line">   set default="Advanced options for Debian GNU/Linux&gt;Debian GNU/Linux, with Linux 4.14.129-bbrplus"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ x"$&#123;feature_menuentry_id&#125;" = xy ]; then</span><br><span class="line">  menuentry_id_option="--id"</span><br><span class="line">else</span><br><span class="line">  menuentry_id_option=""</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">export menuentry_id_option</span><br><span class="line"></span><br><span class="line">if [ "$&#123;prev_saved_entry&#125;" ]; then</span><br><span class="line">  set saved_entry="$&#123;prev_saved_entry&#125;"</span><br><span class="line">  save_env saved_entry</span><br><span class="line">  set prev_saved_entry=</span><br><span class="line">  save_env prev_saved_entry</span><br><span class="line">  set boot_once=true</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">function savedefault &#123;</span><br><span class="line">  if [ -z "$&#123;boot_once&#125;" ]; then</span><br><span class="line">    saved_entry="$&#123;chosen&#125;"</span><br><span class="line">    save_env saved_entry</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line">function load_video &#123;</span><br><span class="line">  if [ x$feature_all_video_module = xy ]; then</span><br><span class="line">    insmod all_video</span><br><span class="line">  else</span><br><span class="line">    insmod efi_gop</span><br><span class="line">    insmod efi_uga</span><br><span class="line">    insmod ieee1275_fb</span><br><span class="line">    insmod vbe</span><br><span class="line">    insmod vga</span><br><span class="line">    insmod video_bochs</span><br><span class="line">    insmod video_cirrus</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [ x$feature_default_font_path = xy ] ; then</span><br><span class="line">   font=unicode</span><br><span class="line">else</span><br><span class="line">insmod part_msdos</span><br><span class="line">insmod ext2</span><br><span class="line">if [ x$feature_platform_search_hint = xy ]; then</span><br><span class="line">  search --no-floppy --fs-uuid --set=root  027db92b-683c-47c8-8767-e1fc16ee6df7</span><br><span class="line">else</span><br><span class="line">  search --no-floppy --fs-uuid --set=root 027db92b-683c-47c8-8767-e1fc16ee6df7</span><br><span class="line">fi</span><br><span class="line">    font="/usr/share/grub/unicode.pf2"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if loadfont $font ; then</span><br><span class="line">  set gfxmode=auto</span><br><span class="line">  load_video</span><br><span class="line">  insmod gfxterm</span><br><span class="line">  set locale_dir=$prefix/locale</span><br><span class="line">  set lang=en_US</span><br><span class="line">  insmod gettext</span><br><span class="line">fi</span><br><span class="line">terminal_output gfxterm</span><br><span class="line">if [ "$&#123;recordfail&#125;" = 1 ] ; then</span><br><span class="line">  set timeout=30</span><br><span class="line">else</span><br><span class="line">  if [ x$feature_timeout_style = xy ] ; then</span><br><span class="line">    set timeout_style=menu</span><br><span class="line">    set timeout=5</span><br><span class="line">  <span class="comment"># Fallback normal timeout code in case the timeout_style feature is</span></span><br><span class="line">  <span class="comment"># unavailable.</span></span><br><span class="line">  else</span><br><span class="line">    set timeout=5</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"><span class="comment">### END /etc/grub.d/00_header ###</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### BEGIN /etc/grub.d/05_debian_theme ###</span></span><br><span class="line">set menu_color_normal=cyan/blue</span><br><span class="line">set menu_color_highlight=white/blue</span><br><span class="line"><span class="comment">### END /etc/grub.d/05_debian_theme ###</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### BEGIN /etc/grub.d/10_linux ###</span></span><br><span class="line">function gfxmode &#123;</span><br><span class="line">        set gfxpayload="$&#123;1&#125;"</span><br><span class="line">&#125;</span><br><span class="line">set linux_gfx_mode=</span><br><span class="line">export linux_gfx_mode</span><br><span class="line">menuentry 'Debian GNU/Linux' --class debian --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-027db92b-683c-47c8-8767-e1fc16ee6df7' &#123;</span><br><span class="line">        load_video</span><br><span class="line">        insmod gzio</span><br><span class="line">        if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">        insmod part_msdos</span><br><span class="line">        insmod ext2</span><br><span class="line">        if [ x$feature_platform_search_hint = xy ]; then</span><br><span class="line">          search --no-floppy --fs-uuid --set=root  f9cae74d-6fc8-47c0-be89-00a237271167</span><br><span class="line">        else</span><br><span class="line">          search --no-floppy --fs-uuid --set=root f9cae74d-6fc8-47c0-be89-00a237271167</span><br><span class="line">        fi</span><br><span class="line">        echo    'Loading Linux 4.14.129-bbrplus ...'</span><br><span class="line">        linux   /vmlinuz-4.14.129-bbrplus root=UUID=027db92b-683c-47c8-8767-e1fc16ee6df7 ro  quiet</span><br><span class="line">        echo    'Loading initial ramdisk ...'</span><br><span class="line">        initrd  /initrd.img-4.14.129-bbrplus</span><br><span class="line">&#125;</span><br><span class="line">submenu 'Advanced options for Debian GNU/Linux' $menuentry_id_option 'gnulinux-advanced-027db92b-683c-47c8-8767-e1fc16ee6df7' &#123;</span><br><span class="line">        menuentry 'Debian GNU/Linux, with Linux 4.14.129-bbrplus' --class debian --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-4.14.129-bbrplus-advanced-027db92b-683c-47c8-8767-e1fc16ee6df7' &#123;</span><br><span class="line">                load_video</span><br><span class="line">                insmod gzio</span><br><span class="line">                if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">                insmod part_msdos</span><br><span class="line">                insmod ext2</span><br><span class="line">                if [ x$feature_platform_search_hint = xy ]; then</span><br><span class="line">                  search --no-floppy --fs-uuid --set=root  f9cae74d-6fc8-47c0-be89-00a237271167</span><br><span class="line">                else</span><br><span class="line">                  search --no-floppy --fs-uuid --set=root f9cae74d-6fc8-47c0-be89-00a237271167</span><br><span class="line">                fi</span><br><span class="line">                echo    'Loading Linux 4.14.129-bbrplus ...'</span><br><span class="line">                linux   /vmlinuz-4.14.129-bbrplus root=UUID=027db92b-683c-47c8-8767-e1fc16ee6df7 ro  quiet</span><br><span class="line">                echo    'Loading initial ramdisk ...'</span><br><span class="line">                initrd  /initrd.img-4.14.129-bbrplus</span><br><span class="line">        &#125;</span><br><span class="line">        menuentry 'Debian GNU/Linux, with Linux 4.14.129-bbrplus (recovery mode)' --class debian --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-4.14.129-bbrplus-recovery-027db92b-683c-47c8-8767-e1fc16ee6df7' &#123;</span><br><span class="line">                load_video</span><br><span class="line">                insmod gzio</span><br><span class="line">                if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">                insmod part_msdos</span><br><span class="line">                insmod ext2</span><br><span class="line">                if [ x$feature_platform_search_hint = xy ]; then</span><br><span class="line">                  search --no-floppy --fs-uuid --set=root  f9cae74d-6fc8-47c0-be89-00a237271167</span><br><span class="line">                else</span><br><span class="line">                  search --no-floppy --fs-uuid --set=root f9cae74d-6fc8-47c0-be89-00a237271167</span><br><span class="line">                fi</span><br><span class="line">                echo    'Loading Linux 4.14.129-bbrplus ...'</span><br><span class="line">                linux   /vmlinuz-4.14.129-bbrplus root=UUID=027db92b-683c-47c8-8767-e1fc16ee6df7 ro single</span><br><span class="line">                echo    'Loading initial ramdisk ...'</span><br><span class="line">                initrd  /initrd.img-4.14.129-bbrplus</span><br><span class="line">        &#125;</span><br><span class="line">        menuentry 'Debian GNU/Linux, with Linux 4.9.0-8-amd64' --class debian --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-4.9.0-8-amd64-advanced-027db92b-683c-47c8-8767-e1fc16ee6df7' &#123;</span><br><span class="line">                load_video</span><br><span class="line">                insmod gzio</span><br><span class="line">                if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">                insmod part_msdos</span><br><span class="line">                insmod ext2</span><br><span class="line">                if [ x$feature_platform_search_hint = xy ]; then</span><br><span class="line">                  search --no-floppy --fs-uuid --set=root  f9cae74d-6fc8-47c0-be89-00a237271167</span><br><span class="line">                else</span><br><span class="line">                  search --no-floppy --fs-uuid --set=root f9cae74d-6fc8-47c0-be89-00a237271167</span><br><span class="line">                fi</span><br><span class="line">                echo    'Loading Linux 4.9.0-8-amd64 ...'</span><br><span class="line">                linux   /vmlinuz-4.9.0-8-amd64 root=UUID=027db92b-683c-47c8-8767-e1fc16ee6df7 ro  quiet</span><br><span class="line">                echo    'Loading initial ramdisk ...'</span><br><span class="line">                initrd  /initrd.img-4.9.0-8-amd64</span><br><span class="line">        &#125;</span><br><span class="line">        menuentry 'Debian GNU/Linux, with Linux 4.9.0-8-amd64 (recovery mode)' --class debian --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-4.9.0-8-amd64-recovery-027db92b-683c-47c8-8767-e1fc16ee6df7' &#123;</span><br><span class="line">                load_video</span><br><span class="line">                insmod gzio</span><br><span class="line">                if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">                insmod part_msdos</span><br><span class="line">                insmod ext2</span><br><span class="line">                if [ x$feature_platform_search_hint = xy ]; then</span><br><span class="line">                  search --no-floppy --fs-uuid --set=root  f9cae74d-6fc8-47c0-be89-00a237271167</span><br><span class="line">                else</span><br><span class="line">                  search --no-floppy --fs-uuid --set=root f9cae74d-6fc8-47c0-be89-00a237271167</span><br><span class="line">                fi</span><br><span class="line">                echo    'Loading Linux 4.9.0-8-amd64 ...'</span><br><span class="line">                linux   /vmlinuz-4.9.0-8-amd64 root=UUID=027db92b-683c-47c8-8767-e1fc16ee6df7 ro single</span><br><span class="line">                echo    'Loading initial ramdisk ...'</span><br><span class="line">                initrd  /initrd.img-4.9.0-8-amd64</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">### END /etc/grub.d/10_linux ###</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### BEGIN /etc/grub.d/20_linux_xen ###</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### END /etc/grub.d/20_linux_xen ###</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### BEGIN /etc/grub.d/30_os-prober ###</span></span><br><span class="line"><span class="comment">### END /etc/grub.d/30_os-prober ###</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### BEGIN /etc/grub.d/30_uefi-firmware ###</span></span><br><span class="line"><span class="comment">### END /etc/grub.d/30_uefi-firmware ###</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### BEGIN /etc/grub.d/40_custom ###</span></span><br><span class="line"><span class="comment"># This file provides an easy way to add custom menu entries.  Simply type the</span></span><br><span class="line"><span class="comment"># menu entries you want to add after this comment.  Be careful not to change</span></span><br><span class="line"><span class="comment"># the 'exec tail' line above.</span></span><br><span class="line"><span class="comment">### END /etc/grub.d/40_custom ###</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### BEGIN /etc/grub.d/41_custom ###</span></span><br><span class="line">if [ -f  $&#123;config_directory&#125;/custom.cfg ]; then</span><br><span class="line">  source $&#123;config_directory&#125;/custom.cfg</span><br><span class="line">elif [ -z "$&#123;config_directory&#125;" -a -f  $prefix/custom.cfg ]; then</span><br><span class="line">  source $prefix/custom.cfg;</span><br><span class="line">fi</span><br><span class="line"><span class="comment">### END /etc/grub.d/41_custom ###</span></span><br></pre></td></tr></table></figure><p>这其实是一个树结构，包含了<code>menuentry</code>，<code>submenu</code>等项，而我们的目标就是将我们的新内核变成默认的启动项。为此，我们需要修改启动菜单模板。</p></li><li><p>修改启动菜单模板</p><figure class="highlight bash"><figcaption><span>/etc/default/grub </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRUB_DEFAULT=0 修改为</span><br><span class="line">GRUB_DEFAULT=<span class="string">"Advanced options for Debian GNU/Linux&gt;Debian GNU/Linux, with Linux 4.14.129-bbrplus"</span></span><br></pre></td></tr></table></figure><p>其中<code>Advanced options for Debian GNU/Linux</code>是一级菜单,<code>Debian GNU/Linux, with Linux 4.14.129-bbrplus</code>是二级菜单, 中间用<code>&gt;</code>连接.</p></li><li><p>生成新的启动菜单文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update-grub</span><br></pre></td></tr></table></figure></li><li><p>重启系统</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>配置双栈网站——使Nginx同时监听ipv4/ipv6</title>
+      <link href="/2019/12/10/%E4%BD%BFNginx%E5%90%8C%E6%97%B6%E7%9B%91%E5%90%ACipv4%E5%92%8Cipv6%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/"/>
+      <url>/2019/12/10/%E4%BD%BFNginx%E5%90%8C%E6%97%B6%E7%9B%91%E5%90%ACipv4%E5%92%8Cipv6%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要</strong> 提供了使Nginx同时监听ipv4和ipv6的配置方法</p><a id="more"></a><p>曾经有一种方式是在端口前加上<code>[::]:</code>，具体操作方式如下：</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># listen 80;</span></span><br><span class="line">listen [::]:80;</span><br><span class="line"><span class="comment"># listen 443 ssl http2;</span></span><br><span class="line">listen [::]:443 ssl http2;</span><br></pre></td></tr></table></figure><p>但是新版Nginx默认启用<code>ipv6only=on</code>选项，如果按照上文方式修改，最终只会监听ipv6而不会监听ipv4，因此正确的修改方式显示指定监听ipv4和ipv6，具体操作如下：</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">listen 80;</span><br><span class="line">listen [::]:80;</span><br><span class="line">listen 443 ssl http2;</span><br><span class="line">listen [::]:443 ssl http2;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vps </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>利用shadowsocks搭建6to4隧道</title>
+      <link href="/2019/12/07/%E5%88%A9%E7%94%A8shadowsocks%E6%90%AD%E5%BB%BA6to4%E9%9A%A7%E9%81%93/"/>
+      <url>/2019/12/07/%E5%88%A9%E7%94%A8shadowsocks%E6%90%AD%E5%BB%BA6to4%E9%9A%A7%E9%81%93/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要</strong> 利用shadowsocks，搭建6to4隧道，使得纯ipv6服务器获得访问ipv4网络的能力。搭建过程中需要用到另外一台双栈服务器。下面将纯v6服务器称为A，双栈服务器称为B。A是隧道的客户端，B是隧道的服务端。</p><a id="more"></a><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol><li><p>安装shadowsocks<br>在A和B上分别运行如下命令，安装shadowsocks：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/shadowsocks/shadowsocks-libev/releases/download/v3.3.3/shadowsocks-libev-3.3.3.tar.gz</span><br><span class="line">tar zxvf shadowsocks-libev-3.3.3.tar.gz</span><br><span class="line"><span class="built_in">cd</span> shadowsocks-libev-3.3.3</span><br><span class="line">yum install asciidoc xmlto pcre-devel mbedtls-devel libsodium-devel c-ares-devel libev-devel -y</span><br><span class="line">./configure --prefix=/opt/shadowsocks-libev</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></li><li><p>配置隧道服务端</p><ol><li>修改配置文件<br>打开<code>/etc/shadowsocks.json</code>并添加如下内容：<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        <span class="attr">"server"</span>:[<span class="string">"[::0]"</span>],</span><br><span class="line">        <span class="attr">"server_port"</span>:&lt;your server port&gt;,</span><br><span class="line">        <span class="attr">"password"</span>:<span class="string">"&lt;your password&gt;"</span>,</span><br><span class="line">        <span class="attr">"timeout"</span>:<span class="number">300</span>,</span><br><span class="line">        <span class="attr">"user"</span>:<span class="string">"nobody"</span>,</span><br><span class="line">        <span class="attr">"method"</span>:<span class="string">"salsa20"</span>,</span><br><span class="line">        <span class="attr">"fast_open"</span>:<span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"nameserver"</span>:<span class="string">"8.8.8.8"</span>,</span><br><span class="line">        <span class="attr">"mode"</span>:<span class="string">"tcp_and_udp"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>运行服务端程序<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/shadowsocks-libev/bin/ss-server -c /etc/shadowsocks.json</span><br></pre></td></tr></table></figure>将会看到如下输出：<br><img src="/images/pasted-1.png" alt=""></li></ol></li><li><p>配置隧道客户端</p><ol><li>修改配置文件<br>打开<code>/etc/shadowsocks.json</code>并添加如下内容：<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"server"</span>: <span class="string">"&lt;A's ipv6&gt;"</span>,</span><br><span class="line">  <span class="attr">"server_port"</span>: &lt;A's port&gt;,</span><br><span class="line">  <span class="attr">"password"</span>: <span class="string">"&lt;your password"</span>,</span><br><span class="line">  <span class="attr">"method"</span>: <span class="string">"salsa20"</span>,</span><br><span class="line">  <span class="attr">"timeout"</span>: <span class="number">20</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>运行客户端<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/shadowsocks-libev/bin/ss-local -c /etc/shadowsocks.json</span><br></pre></td></tr></table></figure>将会看到如下输出：<br><img src="/images/pasted-2.png" alt=""></li></ol></li></ol><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在A服务器下运行如下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --socks5 127.0.0.1:1080 baidu.com</span><br></pre></td></tr></table></figure><p>看到如下输出：<br><img src="/images/pasted-3.png" alt=""><br>说明一切正常</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> vps </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>将QuerySet转为dict</title>
+      <link href="/2019/10/27/%E3%80%90Django%E3%80%91%E5%A6%82%E4%BD%95%E5%B0%86QuerySet%E8%BD%AC%E4%B8%BAdict/"/>
+      <url>/2019/10/27/%E3%80%90Django%E3%80%91%E5%A6%82%E4%BD%95%E5%B0%86QuerySet%E8%BD%AC%E4%B8%BAdict/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要</strong> 关于这个问题，中文互联网上有很多错误的方案，这里记录一种亲测可行的解决方案</p><a id="more"></a><p>具体的场景是：</p><p>通过<code>ServerModel.objects.all().values()</code>获得了一个<code>QuerySet</code>类对象</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;QuerySet [&#123;<span class="string">'id'</span>: <span class="number">1</span>, <span class="string">'server_ip'</span>: <span class="string">'193.221.232.1'</span>, <span class="string">'server_name'</span>: <span class="string">'sss'</span>, <span class="string">'server_user'</span>: <span class="string">''</span>, <span class="string">'server_passwd'</span>: <span class="string">''</span>, <span class="string">'server_createtime'</span>: datetime.datetime(<span class="number">2019</span>,<span class="number">10</span>, <span class="number">25</span>, <span class="number">4</span>, <span class="number">20</span>, <span class="number">8</span>, <span class="number">570196</span>, tzinfo=&lt;UTC&gt;), <span class="string">'server_comment'</span>: <span class="string">''</span>&#125;, &#123;<span class="string">'id'</span>: <span class="number">2</span>, <span class="string">'server_ip'</span>: <span class="string">'193.221.232.2'</span>, <span class="string">'server_name'</span>: <span class="string">'sss'</span>, <span class="string">'server_user'</span>: <span class="string">''</span>, <span class="string">'server_passwd'</span>: <span class="string">''</span>, <span class="string">'server_createtime'</span>: datetime.datetime(<span class="number">2019</span>, <span class="number">10</span>, <span class="number">25</span>, <span class="number">4</span>, <span class="number">23</span>, <span class="number">24</span>, <span class="number">77533</span>, tzinfo=&lt;UTC&gt;), <span class="string">'server_comment'</span>: <span class="string">''</span>&#125;]&gt;</span><br></pre></td></tr></table></figure><p> 现在希望将这个对象通过<code>JsonResponse()</code>发送出去。由于<code>JsonResponse()</code>的安全限制，只允许发送<code>dict</code>对象，因此需要将<code>QuerySet</code>转为<code>dict</code> 。</p><p> 在中文互联网下，大部分的方法是调用<code>model_to_dict</code>函数，这是非常愚蠢的做法，顾名思义，<code>model_to_dict</code>负责将<code>model</code>类而不是<code>QuerySet</code>类转变为<code>dict</code>，如果坚持使用<code>model_to_dict</code>则会报错<code>&#39;QuerySet&#39; object has no attribute &#39;_meta&#39;</code>。</p><p>  正确的做法是使用<code>list</code>函数。 将<code>list()</code>作用在<code>QuerySet</code>上会得到一个<code>list</code>对象</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;<span class="string">'id'</span>: <span class="number">1</span>, <span class="string">'server_ip'</span>: <span class="string">'193.221.232.1'</span>, <span class="string">'server_name'</span>: <span class="string">'sss'</span>, <span class="string">'server_user'</span>: <span class="string">''</span>, <span class="string">'server_passwd'</span>: <span class="string">''</span>, <span class="string">'server_createtime'</span>: datetime.datetime(<span class="number">2019</span>,<span class="number">10</span>, <span class="number">25</span>, <span class="number">4</span>, <span class="number">20</span>, <span class="number">8</span>, <span class="number">570196</span>, tzinfo=&lt;UTC&gt;), <span class="string">'server_comment'</span>: <span class="string">''</span>&#125;, &#123;<span class="string">'id'</span>: <span class="number">2</span>, <span class="string">'server_ip'</span>: <span class="string">'193.221.232.2'</span>, <span class="string">'server_name'</span>: <span class="string">'sss'</span>, <span class="string">'server_user'</span>: <span class="string">''</span>, <span class="string">'server_passwd'</span>: <span class="string">''</span>, <span class="string">'server_createtime'</span>: datetime.datetime(<span class="number">2019</span>, <span class="number">10</span>, <span class="number">25</span>, <span class="number">4</span>, <span class="number">23</span>, <span class="number">24</span>, <span class="number">77533</span>, tzinfo=&lt;UTC&gt;), <span class="string">'server_comment'</span>: <span class="string">''</span>&#125;]</span><br></pre></td></tr></table></figure><p>  随后将这个<code>list</code>对象放入一个<code>dict</code>并赋予键名即完成了<code>QuerySet</code>到<code>dic</code>t的转换.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> django </tag>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Dell服务器的几款raid工具</title>
+      <link href="/2019/10/04/Dell%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%87%A0%E6%AC%BEraid%E5%B7%A5%E5%85%B7/"/>
+      <url>/2019/10/04/Dell%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%87%A0%E6%AC%BEraid%E5%B7%A5%E5%85%B7/</url>
+      
+        <content type="html"><![CDATA[<p>收集了大部分dell平台下的raid工具，有一些比较古老了，很难找到相关资料，记录一下。</p><a id="more"></a><h2 id="1-perccli"><a href="#1-perccli" class="headerlink" title="1. perccli"></a>1. perccli</h2><p>据<a href="https://www.reddit.com/r/sysadmin/comments/bvb48v/dells_perccli_perc_utility_and_the_delllsi_perc/" target="_blank" rel="noopener">reddit</a>上网友评论，perccli适用于8系列或更高的raid卡，由于笔者并不拥有h800或更高级别的raid卡，因此无法验证消息可靠性。</p><blockquote><p>The h200 in spit of its name is not really a hardware raid.. Its actually software raid (like the h300 series). H200/300 do not have a battery either. It’s software raid within the controller. Its equivalent to raid on your desktop motherboard in performance. According to Dell unless its a 8 series or newer you need to use the megacli software instead of the perccli</p></blockquote><h2 id="2-Megacli"><a href="#2-Megacli" class="headerlink" title="2. Megacli"></a>2. Megacli</h2><p>是Lsi官方出品的自家raid管理工具，因为dell对raid卡的包装较少，因此可以直接使用在dell raid上，也是直接百度时可以找到的最常见的raid卡管理工具</p><h2 id="3-Lsiutil"><a href="#3-Lsiutil" class="headerlink" title="3. Lsiutil"></a>3. Lsiutil</h2><p>有一种说法是，支持raid5的被称为“阵列卡”，不支持raid5的被称为SAS卡。 Lsiutil就是针对sas卡的管理工具。但是已经非常古老了，连H200都无法支持。</p><blockquote><p>参考链接：<a href="http://lists.us.dell.com/pipermail/linux-poweredge/2010-March/041725.html" target="_blank" rel="noopener">http://lists.us.dell.com/pipermail/linux-poweredge/2010-March/041725.html</a> PET310, CentOS5.4, mpt2sas 02.00.02.00 For previous MPT controllers we used LSI’s lsiutil utility as a light weight alternative to OMSA’s “omreport storage controller”. Now with the new SAS2 controllers, such as the PERC H200, lsiutil won’t work anymore (tried with v1.62), and you need the new sas2ircu utility, whose syntax is documented here: <a href="http://www.lsi.com/DistributionSystem/AssetDocument/SAS2\_IR\_User_Guide.pdf" target="_blank" rel="noopener">http://www.lsi.com/DistributionSystem/AssetDocument/SAS2\_IR\_User_Guide.pdf</a></p></blockquote><h2 id="4-SAS2IRCU"><a href="#4-SAS2IRCU" class="headerlink" title="4. SAS2IRCU"></a>4. SAS2IRCU</h2><p>比Lsiutil更新的raid管理工具，适用于H200等，与此类似的还有SAS3IRCU</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>xfs文件系统移动分区</title>
+      <link href="/2019/08/05/xfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A7%BB%E5%8A%A8%E5%88%86%E5%8C%BA/"/>
+      <url>/2019/08/05/xfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%A7%BB%E5%8A%A8%E5%88%86%E5%8C%BA/</url>
+      
+        <content type="html"><![CDATA[<p>本文的适用于xfs文件系统（ext*文件系统可以直接用<code>parted</code>进行分区移动）</p><a id="more"></a><p>步骤</p><ol><li><p>进入救援模式</p></li><li><p>备份原本的分区（以<code>/dev/vd2</code>为例）</p><p>dd if=/dev/vda2 of=/root/temp/vda2.bak</p></li></ol><ol start="3"><li><p>删除原本的vda2分区，重新划分分区表</p></li><li><p>还原先前的分区</p><p>dd if=/root/temp/vda2.bak of=/dev/vda2</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ztsh项目完成后的一些感悟</title>
+      <link href="/2019/07/13/ztsh%E9%A1%B9%E7%9B%AE%E5%AE%8C%E6%88%90%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%82%9F/"/>
+      <url>/2019/07/13/ztsh%E9%A1%B9%E7%9B%AE%E5%AE%8C%E6%88%90%E5%90%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%82%9F/</url>
+      
+        <content type="html"><![CDATA[<p>因为接了腾讯的兼职任务，之前一段时间一直在做一个反向代理的管理平台，项目完成之后也积累了一些感悟，特此记录，免得日后忘却。</p><a id="more"></a><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="阶段一"><a href="#阶段一" class="headerlink" title="阶段一"></a>阶段一</h3><p>这段时间，目标主要是对标nc，也就是bash+管道重定向，相对而言比较简单，主要涉及了 - Django框架的使用 - xtermjs前端库的使用 - jinja2模板渲染引擎的使用 - websocket的接触与使用（django的channels模块） 大概花了三天完成了主要工作，前端设计套用了现成的模板。但和腾讯方接触的时候，发现不符合要求。单纯的管道重定向无法支持sudo，vim等操作，于是废弃之前的代码，从伪终端入手，重构整个项目。</p><h3 id="阶段二"><a href="#阶段二" class="headerlink" title="阶段二"></a>阶段二</h3><p>主要学习了伪终端，了解伪终端的时候查看了这篇文章，帮助很大，<a href="https://www.cnblogs.com/zzdyyy/p/7538077.html" target="_blank" rel="noopener">Linux 的伪终端的基本原理 及其在远程登录（SSH，telnet等）中的应用</a>，主要是对伪终端有了一个概念。 后来查阅相关资料，准备用python完成伪终端的制作，却发现python关于这方面的资料很少，最终决定修改GitHub上的<a href="https://github.com/orangetw/tsh" target="_blank" rel="noopener">orangetw/tsh</a>项目。 修改项目的过程中遇到了一些坑，也给我提了一个醒： <strong>修改项目之前一定要通读全项目，不要觉得看懂了项目的逻辑就开始修改，不然你永远不知道项目哪里是不是有一行代码会坑你！！</strong> 遇到过一个问题，在一个线程中accept一个socket，然后recv没有问题，结果把这个socket传送到其他线程再recv就出现了问题，debug了很久，最终发现recv的wrapper有一个alarm定时器，传送socket的过程已经超时了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【摘抄】Djangodui对URL尾斜杠(back slash)的处理</title>
+      <link href="/2019/07/06/%E3%80%90%E6%91%98%E6%8A%84%E3%80%91Djangodui%E5%AF%B9URL%E5%B0%BE%E6%96%9C%E6%9D%A0(back%20slash)%E7%9A%84%E5%A4%84%E7%90%86/"/>
+      <url>/2019/07/06/%E3%80%90%E6%91%98%E6%8A%84%E3%80%91Djangodui%E5%AF%B9URL%E5%B0%BE%E6%96%9C%E6%9D%A0(back%20slash)%E7%9A%84%E5%A4%84%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘抄自 <a href="https://www.bbsmax.com/A/kjdwABD6JN/" target="_blank" rel="noopener">https://www.bbsmax.com/A/kjdwABD6JN/</a></strong> </p><p>首先说下什么是尾斜杠。</p><pre><code>http://www.baidu.com/    # 有尾斜杠http://www.baidu.com     # 无尾斜杠</code></pre><p>那么为什么我们要关注尾斜杠这个问题呢？这个要从Django和Flask对于URL的设置说起。 Django和Flask设置URL方式：</p><pre><code>r&apos;^admin/$&apos;   # Django&apos;admin/&apos;   # flask</code></pre><p>可见两者都是基于字符串的匹配。所以问题就出来了： 如果我设置了一个形如’admin’的URL，那么当用户输入’admin/‘的时候应不应该匹配呢？ 或者换种说法： 如果我设置了一个形如’admin/的’URL，那么当用户输入’admin’的时候应不应该匹配呢？ 这就是尾斜杠问题。 下面我们看看Django和Flask是如何处理的。 Django中的处理方法是提供了一个设置项，<code>APPEND_SLASH</code>，这个设置的默认值是True。当APPEND_SLASH为True的时候，如果一个URL没有匹配成功，那么Django会在这个URL尾部加上一个<code>/</code>并重新redirect回来。如果设置为False，那没有匹配成功的时候就什么都不会做。 需要注意的是，由于采用了redirect的方式，所以POST数据可能会丢失。 Flask默认行为和Django一样，只不过文档中并没有说明是不是采用redirect方法，如果不是的话，那么数据就没有丢失的风险了。 总结 <strong>如果设置了’admin’，那么只有’admin’会匹配，’admin/‘不会匹配。</strong> <strong>如果设置了’admin/‘，那么’admin’和’admin/‘都会匹配。</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux下ZIP文件的修复</title>
+      <link href="/2019/06/25/Linux%E4%B8%8BZIP%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E5%A4%8D/"/>
+      <url>/2019/06/25/Linux%E4%B8%8BZIP%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E5%A4%8D/</url>
+      
+        <content type="html"><![CDATA[<p>对于zip文件而言，即使文件残缺，也可以通过截断残缺部分的方式来获取余下完整部分的内容。对于zip文件而言，即使文件残缺，也可以通过截断残缺部分的方式来获取余下完整部分的内容。</p><a id="more"></a><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>一般来说，下载没有完成的zip文件在解压的时候遇到的问题都是</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Missing end (EOCDR) signature</span><br></pre></td></tr></table></figure><p>不要慌，这只是已经下载的zip压缩包中最后一个文件的EOCDR损坏，因此之前的文件依然是可以识别的。 实战如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost temp]# zip -FF tempae --out tempaefix.zip</span><br><span class="line">Fix archive (-FF) - salvage what can</span><br><span class="line">    zip warning: Missing end (EOCDR) signature - either this archive</span><br><span class="line">                     is not readable or the end is damaged</span><br><span class="line">Is this a single-disk archive?  (y/n): y</span><br><span class="line">  Assuming single-disk archive</span><br><span class="line">Scanning for entries...</span><br><span class="line">  Found spanning marker, but did not expect split (multi-disk) archive...</span><br><span class="line"> copying: 158g0141  (104857600 bytes)</span><br><span class="line"> copying: 158g0142  (104857600 bytes)</span><br><span class="line"> copying: 158g0143  (104857600 bytes)</span><br><span class="line"> copying: 158g0144  (104857600 bytes)</span><br><span class="line"> copying: 158g0145  (104857600 bytes)</span><br><span class="line"> copying: 158g0146  (104857600 bytes)</span><br><span class="line"> copying: 158g0147  (104857600 bytes)</span><br><span class="line"> copying: 158g0148  (104857600 bytes)</span><br><span class="line"> copying: 158g0149  (104857600 bytes)</span><br><span class="line"> copying: 158g0150 </span><br><span class="line">    zip warning: no end of stream entry found: 158g0150</span><br><span class="line">    zip warning: rewinding and scanning for later entries</span><br></pre></td></tr></table></figure><p>  可以看到，<code>158g0150</code>没有能够成功读取，但是<code>158g0141</code>~<code>158g0149</code>都可以正确识别。 如果此时直接解压上一步命令的输出文件<code>tempaefix.zip</code>，依然会报错(这个问题留待以后研究) 但是我们可以对<code>tempaefix.zip</code>再次进行修复</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost temp]<span class="comment"># zip -FF tempaefix.zip --out tempaefix1.zip</span></span><br><span class="line">Fix archive (-FF) - salvage what can</span><br><span class="line">    zip warning: Missing end (EOCDR) signature - either this archive</span><br><span class="line">                     is not readable or the end is damaged</span><br><span class="line">Is this a single-disk archive?  (y/n): y</span><br><span class="line">  Assuming single-disk archive</span><br><span class="line">Scanning <span class="keyword">for</span> entries...</span><br><span class="line"> copying: 158g0141  (104857600 bytes)</span><br><span class="line"> copying: 158g0142  (104857600 bytes)</span><br><span class="line"> copying: 158g0143  (104857600 bytes)</span><br><span class="line"> copying: 158g0144  (104857600 bytes)</span><br><span class="line"> copying: 158g0145  (104857600 bytes)</span><br><span class="line"> copying: 158g0146 </span><br><span class="line">    zip warning: no end of stream entry found: 158g0146</span><br><span class="line">    zip warning: rewinding and scanning <span class="keyword">for</span> later entries</span><br></pre></td></tr></table></figure><p>  此时输出的<code>tempaefix1.zip</code>便可以正确解压了，如果依然不ok，则可以对新的输出文件继续修复知道可以正确解压为止。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>手动安装PHP扩展</title>
+      <link href="/2019/06/11/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85PHP%E6%89%A9%E5%B1%95/"/>
+      <url>/2019/06/11/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85PHP%E6%89%A9%E5%B1%95/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要</strong> 记录了一次手动安装<code>tidy</code>扩展的过程。</p><a id="more"></a><h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><ol><li>进入tidy的源码目录 <code>php/ssrc/ext/tidy</code></li><li>编译，这里的 phpsize 和 php-config 的目录需要自行寻找<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/php/bin/phpize </span><br><span class="line">./configure --with-php-config=/usr/local/php/bin/php-config</span><br></pre></td></tr></table></figure></li><li>安装<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></li><li>修改配置文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /www/server/php/72/etc/php.ini # 配置文件目录需要自行查找</span><br></pre></td></tr></table></figure><ul><li>将 <code>extension_dir</code> 设置为 <code>/www/server/php/72/lib/php/extensions/no-debug-non-zts-20170718/</code>，这里的具体值取决于步骤3中编译出的.so文件的位置  </li><li>添加 <code>extension = &quot;tidy.so&quot;</code></li></ul></li><li>重启php</li></ol><h2 id="错误排除"><a href="#错误排除" class="headerlink" title="错误排除"></a>错误排除</h2><ol><li><p>configure: error: Cannot find libtidy</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install libtidy-devel</span><br></pre></td></tr></table></figure><p> 或者</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install http://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libtidy-devel-5.4.0-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure></li><li><p>re2c not found</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://downloads.sourceforge.net/project/re2c/re2c/0.13.7.5/re2c-0.13.7.5.tar.gztar xzf re2c-0.13.7.5.tar.gzcd re2c-0.13.7.5./configuremake &amp;&amp; make install</span><br></pre></td></tr></table></figure></li></ol><h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>其实用<code>pecl</code>自动安装是最方便的。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【VNC】Could not start d-bus. Can you call qdbus? 问题解决</title>
+      <link href="/2019/06/06/%E3%80%90VNC%E3%80%91Could%20not%20start%20d-bus%20Can%20you%20call%20qdbus%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
+      <url>/2019/06/06/%E3%80%90VNC%E3%80%91Could%20not%20start%20d-bus%20Can%20you%20call%20qdbus%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+      
+        <content type="html"><![CDATA[<p>主要解决如下问题：</p><pre><code>Could not start d-bus. Can you call qdbus?`</code></pre><a id="more"></a><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><pre><code>vim /usr/bin/startkde # 查看KDE启动脚本。</code></pre><p>找到qdbus的定义，发现</p><pre><code>qdbus=qdbus</code></pre><p>在bash下直接输入qdbus，报错</p><pre><code>X11 initialization failed</code></pre><p>输入</p><pre><code>export DISPLAY=:0</code></pre><p>解决</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【leetcode】4. 寻找两个有序数组的中位数</title>
+      <link href="/2019/05/20/%E3%80%90leetcode%E3%80%914.%20%E5%AF%BB%E6%89%BE%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/"/>
+      <url>/2019/05/20/%E3%80%90leetcode%E3%80%914.%20%E5%AF%BB%E6%89%BE%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><blockquote><p>给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。 请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。 你可以假设 nums1 和 nums2 不会同时为空。</p></blockquote><h2 id="本人题解："><a href="#本人题解：" class="headerlink" title="本人题解："></a>本人题解：</h2><blockquote><p><img src="https://images.fromling.com/images/1d5b9bb3bf021a6ee0dba56382e3ff0c.png" alt=""></p></blockquote><pre><code>double findMedianSortedArrays(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2)     {        int m = nums1.size();        int n = nums2.size();        vector&lt;int&gt;::iterator miter = nums1.begin();        vector&lt;int&gt;::iterator niter = nums2.begin();        int count = 0;        switch((m+n) % 2)        {            case 1:                {                    vector&lt;int&gt;::iterator curriter;                    while(miter != nums1.end() || niter != nums2.end())                    {                        if (miter != nums1.end() &amp;&amp; niter != nums2.end())                        {                            curriter = (*miter) &lt; (*niter)?miter++:niter++;                        }                        else if(miter != nums1.end())                        {                            curriter = miter++;                        }                        else if(niter != nums2.end())                        {                            curriter = niter++;                        }                        count ++;                           if (count == (m + n + 1) / 2)                        {                            return *curriter;                        }                    }                }                break;            case 0:                {                    vector&lt;int&gt;::iterator curriter = nums1.end();                    vector&lt;int&gt;::iterator olditer = nums1.end();                    while(miter != nums1.end() || niter != nums2.end())                    {                        olditer = curriter;                        if (miter != nums1.end() &amp;&amp; niter != nums2.end())                        {                            curriter = (*miter) &lt; (*niter)?miter++:niter++;                        }                        else if(miter != nums1.end())                        {                            curriter = miter++;                        }                        else if(niter != nums2.end())                        {                            curriter = niter++;                        }                         count ++;                           if (count == (m + n + 2) / 2)                        {                            return (double(*olditer) + double(*curriter)) / 2;                        }                    }                }        }</code></pre><h2 id="dalao题解"><a href="#dalao题解" class="headerlink" title="dalao题解"></a>dalao题解</h2><pre><code>double findMedianSortedArrays(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {        int mid = nums1.size() + nums2.size() ;        int is_even = mid % 2;        mid = mid / 2 + 1;        double tmp = 0;        int cur_1 = 0;        int cur_2 = 0;        for(int i = 0 ;i&lt;mid;i++){            int a = 0;            if (cur_1 == nums1.size()){                                a = nums2[cur_2];                cur_2 ++;            }else if (cur_2 == nums2.size()){                a = nums1[cur_1];                cur_1 ++;            }else{                if (nums1[cur_1] &lt; nums2[cur_2]){                    a = nums1[cur_1];                    cur_1 ++;                }else{                    a = nums2[cur_2];                    cur_2 ++;                }            }            if (is_even == 0 &amp;&amp; i == mid - 2){                tmp += a;            }else if (i == mid - 1){                tmp += a;            }        }        if (is_even == 0){            tmp = tmp / 2;        }        return tmp;    }</code></pre><h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ol><li><code>iterator</code>不可以赋值为<code>NULL</code>，不可以与<code>NULL</code>比较。如果想要起到类似的效果，可以赋值为<code>end()</code></li><li>dalao题解中关于中位数的判断很有意思，值得学习一下：设定temp，如果m+n为偶数，则提前两位进行相加，如果m+n为奇数，则只相加一次。避免了两个iterator的浪费</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>记一次WordPress的Markdown美化过程</title>
+      <link href="/2019/05/19/%E8%AE%B0%E4%B8%80%E6%AC%A1WordPress%E7%9A%84Markdown%E7%BE%8E%E5%8C%96%E8%BF%87%E7%A8%8B/"/>
+      <url>/2019/05/19/%E8%AE%B0%E4%B8%80%E6%AC%A1WordPress%E7%9A%84Markdown%E7%BE%8E%E5%8C%96%E8%BF%87%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<p>主要动作是：</p><ol><li>添加了块引用效果</li><li>阻止了代码块中的<code>&lt;</code>&amp;<code>&gt;</code>被转义</li></ol><h2 id="1-添加块引用特效"><a href="#1-添加块引用特效" class="headerlink" title="1. 添加块引用特效"></a>1. 添加块引用特效</h2><p>在<code>自定义-&gt;额外CSS</code>中粘贴</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">blockquote</span> &#123;</span><br><span class="line"><span class="attribute">border-left</span>: <span class="number">4px</span> solid <span class="number">#707070</span>;</span><br><span class="line"><span class="attribute">border-left</span>: <span class="number">4px</span> solid <span class="built_in">rgba</span>(51, 51, 51, 0.7);</span><br><span class="line"><span class="attribute">color</span>: <span class="number">#707070</span>;</span><br><span class="line"><span class="attribute">color</span>: <span class="built_in">rgba</span>(51, 51, 51, 0.7);</span><br><span class="line"><span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line"><span class="attribute">font-size</span>: <span class="number">1.8rem</span>;</span><br><span class="line"><span class="attribute">font-style</span>: italic;</span><br><span class="line"><span class="attribute">line-height</span>: <span class="number">1.6667</span>;</span><br><span class="line"><span class="attribute">margin-bottom</span>: <span class="number">1.6667em</span>;</span><br><span class="line"><span class="attribute">padding-left</span>: <span class="number">0.7778em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="2-避免-lt-gt-被转义"><a href="#2-避免-lt-gt-被转义" class="headerlink" title="2. 避免&lt; &gt; 被转义"></a>2. 避免&lt; &gt; 被转义</h2><p>在 <code>外观-&gt;theme-editor-&gt;functions.php</code> 中添加</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">my_content_filter</span><span class="params">( $content )</span> </span>&#123;</span><br><span class="line">$new_content = str_replace(<span class="string">'&lt;'</span>,<span class="string">'&lt;'</span>,$content);</span><br><span class="line">$new_content = str_replace(<span class="string">'&gt;'</span>,<span class="string">'&gt;'</span>,$new_content);</span><br><span class="line">    <span class="keyword">return</span> $new_content;</span><br><span class="line">&#125;</span><br><span class="line">add_filter( <span class="string">'the_content'</span>, <span class="string">'my_content_filter'</span>);</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【leetcode】3. 无重复字符的最长子串</title>
+      <link href="/2019/05/18/%E3%80%90leetcode%E3%80%913.%20%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/"/>
+      <url>/2019/05/18/%E3%80%90leetcode%E3%80%913.%20%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><blockquote><p>给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</p></blockquote><h2 id="本人题解："><a href="#本人题解：" class="headerlink" title="本人题解："></a>本人题解：</h2><pre><code>int lengthOfLongestSubstring(string s)     {        unordered_map&lt;char, int&gt; storeIndex;        queue&lt;char&gt; charlist;        int maxSize = 0;        for (int i = 0; i &lt; s.size(); ++i)        {            if (storeIndex.count(s[i]) == 0) // map中不存在该元素            {                storeIndex[s[i]] = 1;                charlist.push(s[i]);            }            else            {                while(charlist.front() != s[i])                {                    maxSize = maxSize&gt;storeIndex.size()?maxSize:storeIndex.size();                    storeIndex.erase(charlist.front());                    charlist.pop();                }                charlist.pop();                charlist.push(s[i]);            }        }        return maxSize&gt;storeIndex.size()?maxSize:storeIndex.size();    }</code></pre><h2 id="dalao题解："><a href="#dalao题解：" class="headerlink" title="dalao题解："></a>dalao题解：</h2><blockquote><p>这道题主要用到思路是：滑动窗口 什么是滑动窗口？ 其实就是一个队列,比如例题中的 abcabcbb，进入这个队列（窗口）为 abc 满足题目要求，当再进入 a，队列变成了 abca，这时候不满足要求。所以，我们要移动这个队列！ 如何移动？ 我们只要把队列的左边的元素移出就行了，直到满足题目要求！ 一直维持这样的队列，找出队列出现最长的长度时候，求出解！ 时间复杂度：O(n)</p></blockquote><pre><code>int lengthOfLongestSubstring(string s) {    if(s.size() == 0) return 0;    unordered_set&lt;char&gt; lookup;    int maxStr = 0;    int left = 0;    for(int i = 0; i &lt; s.size(); i++)    {        while (lookup.find(s[i]) != lookup.end())        {            lookup.erase(s[left]);            left ++;        }        maxStr = max(maxStr,i-left+1);        lookup.insert(s[i]);    }    return maxStr;}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> leetcode </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Sqlalchemy的一些学习笔记</title>
+      <link href="/2019/05/06/Sqlalchemy%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <url>/2019/05/06/Sqlalchemy%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Sqlalchemy的正确打开方式"><a href="#Sqlalchemy的正确打开方式" class="headerlink" title="Sqlalchemy的正确打开方式"></a>Sqlalchemy的正确打开方式</h3><pre><code>from sqlalchemy.ext.declarative import declarative_basefrom sqlalchemy import Column, Integer, String, create_engine, Text, Booleanfrom sqlalchemy.orm import sessionmaker# 首先创建链接engine = create_engine(    &amp;#039;sqlite:///books.db?check_same_thread=False&amp;#039;, echo=False)# 依据上文创建的链接初始化一个Session类Session = sessionmaker(bind=engine)# 创建一个Session类实例session = Session()# 数据库模型的基类Base = declarative_base()class BookDatabase(Base):  # 继承Base类    __tablename__ = &amp;#039;Books&amp;#039;  # 此模型类对应的表名    id = Column(Integer, primary_key=True, autoincrement=True)  # 主键自增    bookName = Column(String(40))    pathString = Column(Text)    unique=True)  # 唯一性要求    hasDownload = Column(Boolean, default=False)Base.metadata.create_all(engine)  # 创建数据库</code></pre><h3 id="query的几种用法"><a href="#query的几种用法" class="headerlink" title="query的几种用法"></a>query的几种用法</h3><p>说几点印象深刻的 1.获取某一字段（某一列）的所有值</p><pre><code>session.query(BookDatabase.bookName).all()  # 以上文的BookDatabase类和bookName字段值为例</code></pre><p>2.修改某一字段的值</p><pre><code>book.hasDownload = Truesession.commit() # 记得要commit(), 当然，也可以用update()来修改</code></pre><p>PS: print(session.query(XXXX))可以看到具体的SQL语句，e.g.</p><pre><code>print(session.query(BookDatabase.bookName))output:SELECT &amp;quot;Books&amp;quot;.&amp;quot;bookName&amp;quot; AS &amp;quot;Books_bookName&amp;quot; FROM &amp;quot;Books&amp;quot;</code></pre><p>一些参考文档 <a href="https://www.cnblogs.com/chenxi67/p/10376617.html" target="_blank" rel="noopener">SQlAlchemy的增删改查</a> <a href="https://blog.csdn.net/Lotfee/article/details/57406450" target="_blank" rel="noopener">SQLAlchemy技术文档（中文版）（全）</a> <a href="http://blog.sina.com.cn/s/blog_4ddef8f80101g6cl.html" target="_blank" rel="noopener">Python:数据库操作模块SQLAlchemy</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Python】正则表达式的相关笔记</title>
+      <link href="/2019/05/02/%E3%80%90Python%E3%80%91%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/"/>
+      <url>/2019/05/02/%E3%80%90Python%E3%80%91%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="re-match-pattern-string-flags-0"><a href="#re-match-pattern-string-flags-0" class="headerlink" title="re.match(pattern, string, flags=0)"></a>re.match(pattern, string, flags=0)</h3><p>该函数是<strong>从头开始</strong>匹配字符串，也就是说，对于文本内容, 想要匹配 <code>[i++]</code></p><pre><code>disr[i++]=</code></pre><p>如果像这样使用</p><pre><code>re.match(r&apos;(\[.*?\])&apos;, &apos;disr[i++]=&apos;)</code></pre><p>是无法匹配到的，需要修改为：</p><pre><code>re.match(r&apos;.*(\[.*?\])&apos;, &apos;disr[i++]=&apos;)</code></pre><h3 id="re-findall-pattern-string-flags-0"><a href="#re-findall-pattern-string-flags-0" class="headerlink" title="re.findall(pattern, string, flags=0)"></a>re.findall(pattern, string, flags=0)</h3><p>可以在pattern中用（）扩起若干表达式，最终会返回匹配每个表达式的元组。 EG：</p><pre><code>str=&apos;&quot;加泰罗尼亚地图集.Atlas catalan.图8.jpg*34072643*2018-10-23 18:07:02&quot;&apos;print(re.findall(r&apos;\&quot;(.*?)\*([0-9]*)\*&apos;, str))output: (&apos;加泰罗尼亚地图集.Atlas catalan.图8.jpg&apos;, &apos;34072643&apos;)</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux查看和修改Kernel Boot Parameters</title>
+      <link href="/2019/04/28/Linux%E6%9F%A5%E7%9C%8B%E5%92%8C%E4%BF%AE%E6%94%B9Kernel%20Boot%20Parameters/"/>
+      <url>/2019/04/28/Linux%E6%9F%A5%E7%9C%8B%E5%92%8C%E4%BF%AE%E6%94%B9Kernel%20Boot%20Parameters/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要</strong> 提供了查看和修改Linux系统的Kernel Boot Parameters的方法</p><a id="more"></a><h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>通过<code>cat /proc/cmdline</code>命令可以查看当前的Kernel Boot Parameters</p><h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><pre><code>vi /etc/default/grub</code></pre><p>添加一行</p><pre><code>GRUB_CMDLINE_LINUX_DEFAULT=&amp;quot;要添加的命令&amp;quot;</code></pre><p>保存退出后</p><pre><code>grub2-mkconfig -o /boot/grub2/grub.cfg</code></pre><p>重启即可</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Python终止子线程</title>
+      <link href="/2019/04/21/Python%E7%BB%88%E6%AD%A2%E5%AD%90%E7%BA%BF%E7%A8%8B/"/>
+      <url>/2019/04/21/Python%E7%BB%88%E6%AD%A2%E5%AD%90%E7%BA%BF%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h3 id="利用event"><a href="#利用event" class="headerlink" title="利用event()"></a>利用event()</h3><pre><code>import threadingclass StoppableThread(threading.Thread):    &quot;&quot;&quot;Thread class with a stop() method. The thread itself has to check    regularly for the stopped() condition.&quot;&quot;&quot;    def __init__(self):        super(StoppableThread, self).__init__()        self._stop_event = threading.Event()    def stop(self):        self._stop_event.set()    def stopped(self):        return self._stop_event.is_set()</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Python下使用多线程的两种方式</title>
+      <link href="/2019/04/21/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+      <url>/2019/04/21/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-继承threading类，重写run-函数"><a href="#1-继承threading类，重写run-函数" class="headerlink" title="1.继承threading类，重写run()函数"></a>1.继承threading类，重写run()函数</h2><pre><code>import threading import timeclass timer(threading.Thread): #继承threading.Thread类    def __init__(self, num, interval):         threading.Thread.__init__(self)         self.thread_num = num         self.interval = interval         self.thread_stop = False     def run(self): #Overwrite run() method, put what you want the thread do here         while not self.thread_stop:             print &amp;#039;Thread Object(%d), Time:%s\n&amp;#039; %(self.thread_num, time.ctime())             time.sleep(self.interval)     def stop(self):         self.thread_stop = Truedef test():     thread1 = timer(1, 1)     thread2 = timer(2, 2)     thread1.start()     thread2.start()     time.sleep(10)     thread1.stop()     thread2.stop()     return if __name__ == &amp;#039;__main__&amp;#039;:     test()</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C语言实现Linux下的系统调用</title>
+      <link href="/2019/03/08/C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0Linux%E4%B8%8B%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+      <url>/2019/03/08/C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0Linux%E4%B8%8B%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<p>Linux下的系统调用利用C语言实现，可以有两种方式</p><h4 id="1-syscall函数"><a href="#1-syscall函数" class="headerlink" title="1.syscall函数"></a>1.syscall函数</h4><pre><code>NAME       syscall - 间接系统调用SYNOPSIS       #include &lt;unistd.h&gt;       #include &lt;sys/syscall.h&gt;                 /* For SYS_xxx definitions */</code></pre><p>调用 <code>int syscall(int number, para1, para2...);</code> E.g. write()函数原型为： <code>ssize_t write(int fd,const void*buf,size_t count);</code> write()在Linux系统中的调用号为1 则通过syscall()函数调用write()的方法为： <code>syscall(1,int fd,const void*buf,size_t count)</code></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux中同时使用多个ssh密钥登录不同的主机</title>
+      <link href="/2019/03/04/Linux%E4%B8%AD%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AAssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95%E4%B8%8D%E5%90%8C%E7%9A%84%E4%B8%BB%E6%9C%BA/"/>
+      <url>/2019/03/04/Linux%E4%B8%AD%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AAssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95%E4%B8%8D%E5%90%8C%E7%9A%84%E4%B8%BB%E6%9C%BA/</url>
+      
+        <content type="html"><![CDATA[<p>在配置密钥实现免密登录的时候，Linux会自动加载如下面的四个密钥</p><pre><code>~/.ssh/id_rsa~/.ssh/id_dsa~/.ssh/id_ed25519~/.ssh/id_ecdsa</code></pre><p>而其他名称的密钥是不会被自动加载的，因此其他密钥对应的服务器无法直接实现免密登录。 要想解决这个问题，可以通过增加ssh配置文件来实现，具体操作如下：</p><pre><code>vim ~/.ssh/config添加如下内容Host mydomain.com # 要实现免密登录的主机名    IdentityFile ~/.ssh/id_rsa_mydomain.com # 该主机对应的密钥的路径    User root # 该密钥对应的用户名</code></pre><p>并保重密钥为600权限即可</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>解决CentOS7下NetworkManager中部分端口为umanaged状态这一问题</title>
+      <link href="/2019/03/04/%E8%A7%A3%E5%86%B3CentOS7%E4%B8%8BNetworkManager%E4%B8%AD%E9%83%A8%E5%88%86%E7%AB%AF%E5%8F%A3%E4%B8%BAumanaged%E7%8A%B6%E6%80%81%E8%BF%99%E4%B8%80%E9%97%AE%E9%A2%98/"/>
+      <url>/2019/03/04/%E8%A7%A3%E5%86%B3CentOS7%E4%B8%8BNetworkManager%E4%B8%AD%E9%83%A8%E5%88%86%E7%AB%AF%E5%8F%A3%E4%B8%BAumanaged%E7%8A%B6%E6%80%81%E8%BF%99%E4%B8%80%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>NetworkManager会默认放弃管理<code>/etc/sysconfig/network-scripts/ifcfg-*</code>中显示的网络接口，此时，该接口在命令<code>nmcli d</code>下的状态就是umanaged， <img src="https://blog.fromling.com/wp-content/uploads/2019/03/3ffc0d6b7b06ad28a461c601f1d6fc21.png" alt=""> 要想解决这个问题，需要以下几个步骤</p><pre><code>vim /etc/NetworkManager/NetworkManager.conf[main]plugins=ifcfg-rh # 将这一行注释掉</code></pre><p>然后</p><pre><code>/etc/sysconfig/network-scripts/ifcfg-*NM_CONTROLLED=no # 将这一行注释掉</code></pre><p>最后重启网络</p><pre><code>service network restart</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>修改Linux终端提示符的颜色</title>
+      <link href="/2019/02/21/%E4%BF%AE%E6%94%B9Linux%E7%BB%88%E7%AB%AF%E6%8F%90%E7%A4%BA%E7%AC%A6%E7%9A%84%E9%A2%9C%E8%89%B2/"/>
+      <url>/2019/02/21/%E4%BF%AE%E6%94%B9Linux%E7%BB%88%E7%AB%AF%E6%8F%90%E7%A4%BA%E7%AC%A6%E7%9A%84%E9%A2%9C%E8%89%B2/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-了解PS1"><a href="#1-了解PS1" class="headerlink" title="1.了解PS1:"></a>1.了解PS1:</h3><p>　　PS1是Linux终端用户的一个环境变量，用来定义命令行提示符的参数。 　　在终端输入命令：<code>echo $PS1</code> 可得到当前PS1的定义值：</p><h3 id="2-PS1的常用参数以及含义"><a href="#2-PS1的常用参数以及含义" class="headerlink" title="2.PS1的常用参数以及含义:"></a>2.PS1的常用参数以及含义:</h3><p>参数</p><p>含义</p><p>　　\d</p><p>代表日期，格式为weekday month date，例如：”Mon Aug 1”</p><p>　　\H</p><p>完整的主机名称</p><p>　　\h</p><p>仅取主机名中的第一个名字</p><p>　　\t</p><p>显示时间为24小时格式，如：HH：MM：SS</p><p>　　\T</p><p>显示时间为12小时格式</p><p>　　\A</p><p>显示时间为24小时格式：HH：MM</p><p>　　\u</p><p>当前用户的账号名称</p><p>　　\v</p><p>BASH的版本信息</p><p>　　\w</p><p>完整的工作目录名称</p><p>　　\W</p><p>利用basename取得工作目录名称，只显示最后一个目录名</p><p>　　#</p><p>下达的第几个命令</p><p>　　\$</p><p>提示字符，如果是root用户，提示符为 # ，普通用户则为 $</p><p>所以linux默认的命令行提示信息的格式 　　 <code>PS1=&#39;[\u@\h \W]\$ &#39;</code><br>意思就是：</p><pre><code>[当前用户的账号名称@主机名的第一个名字 工作目录的最后一层目录名]#</code></pre><h3 id="3-颜色设置参数"><a href="#3-颜色设置参数" class="headerlink" title="3.颜色设置参数"></a>3.颜色设置参数</h3><p>　　在PS1中设置字符颜色的格式为： <code>\[\e[F;Bm\]........\[\e[0m\]</code> 其中“F“为字体颜色，编号为30-37，“B”为背景颜色，编号为40-47,<code>\[\e[0m\]</code>作为颜色设定的结束。</p><h4 id="颜色对照表："><a href="#颜色对照表：" class="headerlink" title="颜色对照表："></a>颜色对照表：</h4><p>F</p><p>B</p><p>颜色</p><p>30</p><p>40</p><p>黑色</p><p>31</p><p>41</p><p>红色</p><p>32</p><p>42</p><p>绿色</p><p>33</p><p>43</p><p>黄色</p><p>34</p><p>44</p><p>蓝色</p><p>35</p><p>45</p><p>紫红色</p><p>36</p><p>46</p><p>青蓝色</p><p>37</p><p>47</p><p>白色</p><p>只需将对应数字套入设置格式中即可。 比如要设置命令行的格式为绿字黑底([\e[32;40m])，显示当前用户的账号名称(\u)、主机的第一个名字(\h)、完整的当前工作目录名称(\w)、24小时格式时间(\t)，可以直接在命令行键入如下命令：</p><pre><code>PS1=&apos;[\[\e[32;40m\]\u@\h \w \t]$ \[\e[0m\]&apos;</code></pre><p>推荐配色</p><pre><code>PS1=&quot;\[\e[37;40m\][\[\e[32;40m\]\u\[\e[37;40m\]@\h \[\e[36;40m\]\w\[\e[0m\]]\\$ &quot;</code></pre><p>3.修改.bashrc文件,永久保存命令行样式. 　　上面的设置的作用域只有当前终端的登陆有效，关闭终端或退出登录即刻失效。要想永久性的保存设置，需要修改.bashrc配置文件。 　　键入命令：</p><pre><code>vim ~/.bashrc</code></pre><p>在底部加入这一行:</p><pre><code>PS1=&quot;\[\e[37;40m\][\[\e[32;40m\]\u\[\e[37;40m\]@\h \[\e[36;40m\]\w\[\e[0m\]]\\$ &quot; </code></pre><p>　　保存退出。 　　重新加载bash配置文件:</p><pre><code>source ~/.bashrc</code></pre><p>　　即可立即并永久生效了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>docker安装nginx</title>
+      <link href="/2019/02/20/docker%E5%AE%89%E8%A3%85nginx/"/>
+      <url>/2019/02/20/docker%E5%AE%89%E8%A3%85nginx/</url>
+      
+        <content type="html"><![CDATA[<p>假设将nginx的相关数据及配置挂载于/docker/nginx目录下，则创建目录结构如下：</p><pre><code>docker└── nginx    ├── conf    │   ├── conf.d    │   └── nginx.conf    ├── logs    └── www</code></pre><p>其中nginx.congf为文件，其余为文件夹。 将nginx的默认配置复制至nginx.conf</p><pre><code>server {    listen       80;    server_name  localhost;    #charset koi8-r;    #access_log  /var/log/nginx/host.access.log  main;    location / {        root   /usr/share/nginx/html;        index  index.html index.htm;    }    #error_page  404              /404.html;    # redirect server error pages to the static page /50x.html    #    error_page   500 502 503 504  /50x.html;    location = /50x.html {        root   /usr/share/nginx/html;    }    # proxy the PHP scripts to Apache listening on 127.0.0.1:80    #    #location ~ \.php$ {    #    proxy_pass   http://127.0.0.1;    #}    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000    #    #location ~ \.php$ {    #    root           html;    #    fastcgi_pass   127.0.0.1:9000;    #    fastcgi_index  index.php;    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;    #    include        fastcgi_params;    #}    # deny access to .htaccess files, if Apache&apos;s document root    # concurs with nginx&apos;s one    #    #location ~ /\.ht {    #    deny  all;    #}}</code></pre><p>运行命令</p><pre><code>docker run -p 80:80 -p 443:443 --name nginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/wwwlogs -v $PWD/conf/conf.d:/etc/nginx/conf.d -d nginx</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux下的几款服务器监控工具</title>
+      <link href="/2019/02/03/trashed-2/"/>
+      <url>/2019/02/03/trashed-2/</url>
+      
+        <content type="html"><![CDATA[<p>这里所说的监控网站，是指可以显示cpu用量，内存用量等系统信息的监控网站，若是仅仅需要检查服务器是否在线，则uptimeRobot是最好的选择。  </p><a id="more"></a><h2 id="1-Pinguzo"><a href="#1-Pinguzo" class="headerlink" title="1.Pinguzo"></a>1.Pinguzo</h2><pre><code>特色在于显示的信息极其详尽，但也因此显得操作有些复杂</code></pre><h2 id="2-Nodequery"><a href="#2-Nodequery" class="headerlink" title="2.Nodequery"></a>2.Nodequery</h2><h2 id="3-Hetrixtools"><a href="#3-Hetrixtools" class="headerlink" title="3.Hetrixtools"></a>3.Hetrixtools</h2><p><a href="https://anturis.com" target="_blank" rel="noopener">https://anturis.com</a><br><a href="https://nodequery.com" target="_blank" rel="noopener">https://nodequery.com</a><br><a href="https://cp.pinguzo.com" target="_blank" rel="noopener">https://cp.pinguzo.com</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> vps </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Ceotos7】Linux下安装字体</title>
+      <link href="/2019/01/28/%E3%80%90Ceotos7%E3%80%91Linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%AD%97%E4%BD%93/"/>
+      <url>/2019/01/28/%E3%80%90Ceotos7%E3%80%91Linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%AD%97%E4%BD%93/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>yum install -y fontconfig mkfontscale<br>cd /usr/share/fonts/ #将tff文件拷贝至该目录后<br>mkfontscale<br>mkfontdir<br>fc-cache<br>fc-list#查看已安装字体列表</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux下几种socks流量转http(s)流量的工具</title>
+      <link href="/2018/11/11/Linux%E4%B8%8B%E5%87%A0%E7%A7%8Dsocks%E6%B5%81%E9%87%8F%E8%BD%AChttp(s)%E6%B5%81%E9%87%8F%E7%9A%84%E5%B7%A5%E5%85%B7/"/>
+      <url>/2018/11/11/Linux%E4%B8%8B%E5%87%A0%E7%A7%8Dsocks%E6%B5%81%E9%87%8F%E8%BD%AChttp(s)%E6%B5%81%E9%87%8F%E7%9A%84%E5%B7%A5%E5%85%B7/</url>
+      
+        <content type="html"><![CDATA[<p>ShadowSocket是socket5代理，对于浏览器而言，还需要另外一个socks转http(s)的工具，Windows下自带了proxy，但是Linux下并没有，这里收集整理了一些Linux下的socks转http(s)工具，或许什么时候会用上。</p><ol><li>Privoxy<ol><li>安装<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release</span><br><span class="line">yum install privoxy</span><br></pre></td></tr></table></figure></li><li>配置<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/privoxy/config</span><br><span class="line"><span class="meta">#</span><span class="bash">在 froward-socks4下面添加一条socks5的，因为shadowsocks是socks5，</span></span><br><span class="line"><span class="meta">#</span><span class="bash">地址是127.0.0.1:1080。注意他们最后有一个“.”</span></span><br><span class="line"><span class="meta">#</span><span class="bash">forward-socks4 / socks-gw.example.com:1080 .</span></span><br><span class="line">forward-socks5 / 127.0.0.1:1080 .</span><br><span class="line"><span class="meta">#</span><span class="bash">下面还存在以下一条配置，表示privoxy监听本机8118端口，</span></span><br><span class="line"><span class="meta">#</span><span class="bash">把它作为http代理，代理地址为 http://localhost.8118/ 。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">可以把地址改为 0.0.0.0:8118，表示外网也可以通过本机IP作http代理。</span></span><br><span class="line"><span class="meta">#</span><span class="bash">这样，你的外网IP为1.2.3.4，别人就可以设置 http://1.2.3.4:8118/ 为http代理。</span></span><br><span class="line">listen-address localhost:8118</span><br></pre></td></tr></table></figure></li><li>重启<pre><code>systemctl restart privoxy.serivce</code></pre></li></ol></li></ol><h4 id="Polipo"><a href="#Polipo" class="headerlink" title="Polipo"></a>Polipo</h4><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><blockquote><p>yum install -y texi2html texinfo<br>git clone <a href="https://github.com/jech/polipo.git" target="_blank" rel="noopener">https://github.com/jech/polipo.git</a><br>cd polipo<br>make all<br>make install</p></blockquote><h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><blockquote><p>vi /etc/polipo/config</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【CentOS7】给Linux服务器安装图形界面</title>
+      <link href="/2018/09/01/%E3%80%90CentOS7%E3%80%91%E7%BB%99Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2/"/>
+      <url>/2018/09/01/%E3%80%90CentOS7%E3%80%91%E7%BB%99Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要：</strong> 提供了给Linux服务器安装图形界面的一种方法</p><p>如果说想要给本地的Linux发行版安装图形界面的话，是一件非常简单的事情，安装完成后，使用快捷键ctrl+F1/2/3/4便可以切换图形界面与命令行界面了。若是给远程Linux服务器安装图形界面的话，“安装图形界面”这个操作本身，其实和给本地Linux系统安装图形界面没有差别。但若是想要能够远程连接上图形界面，便要废一番周折了，毕竟，Linux系统可没有微软的远程桌面连接，xshell之类的ssh客户端也并不支持图形化界面。</p><h3 id="安装图形界面"><a href="#安装图形界面" class="headerlink" title="安装图形界面"></a>安装图形界面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum groupinstall <span class="string">"X Window System"</span> //安装X(X Window System) yum groupinstall <span class="string">"GNOME Desktop"</span></span><br></pre></td></tr></table></figure><h3 id="安装、配置-VNC"><a href="#安装、配置-VNC" class="headerlink" title="安装、配置 VNC"></a>安装、配置 VNC</h3><ol><li><p>安装 VNC</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install tigervnc-server</span><br></pre></td></tr></table></figure></li><li><p>配置 VNCServer</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;vncserver@.service &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@:1.service vi &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@:1.service</span><br></pre></td></tr></table></figure></li></ol><p>将文件修改为如下内容 （主要是将原文件中的 &lt;&gt;修改为 root）</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=Remote desktop service (VNC)</span><br><span class="line"><span class="attr">After</span>=syslog.target network.target</span><br><span class="line"></span><br><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">Type</span>=forking</span><br><span class="line"><span class="comment"># Clean any existing files in /tmp/.X11-unix environment</span></span><br><span class="line"><span class="attr">ExecStartPre</span>=/bin/sh -c <span class="string">'/usr/bin/vncserver -kill %i &gt; /dev/null 2&gt;&amp;1 || :'</span></span><br><span class="line"><span class="attr">ExecStart</span>=/usr/sbin/runuser -l root -c <span class="string">"/usr/bin/vncserver %i"</span></span><br><span class="line"><span class="attr">PIDFile</span>=/root/.vnc/%H%i.pid</span><br><span class="line"><span class="attr">ExecStop</span>=/bin/sh -c <span class="string">'/usr/bin/vncserver -kill %i &gt; /dev/null 2&gt;&amp;1 || :'</span></span><br></pre></td></tr></table></figure><p>接着</p><blockquote><p>systemctl daemon-reload //更新systemctl以使其生效 vncpasswd root //设置vncserver的密码</p></blockquote><ul><li>使用 VNCServer</li></ul><blockquote><p>systemctl start vncserver@:1.service // 启动VNC ；或者 vncserver :1 systemctl stop vncserver@:1.service // 停止VNC ；或者 vncserver -kill :1 systemctl enable vncserver@:1.service //设置为开机自动启动</p></blockquote><ul><li>关于VNC的其他命令</li></ul><p>修改VNC界面的分辨率</p><blockquote><p>vi /usr/bin/vncserver</p></blockquote><p>找到默认的1024*768修改为自己显示器的分辨率，并重启。 ps: 旧版本中可以通过修改配置文件<code>/etc/sysconfig/vncservers</code>来修改分辨率，但是在新版本中，此配置文件已被 弃用</p><h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a href="https://jingyan.baidu.com/article/0964eca26fc3b38284f53642.html" target="_blank" rel="noopener">Linux CentOS 7的图形界面安装（GNOME、KDE等）</a> <a href="https://www.cnblogs.com/luhouxiang/p/4829443.html" target="_blank" rel="noopener">CentOS7下安装配置vncserver</a> <a href="https://www.cnblogs.com/del88/p/5656356.html" target="_blank" rel="noopener">修改VNCSERVER 默认的分辨率的方法</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Centos 7修改系统语言</title>
+      <link href="/2018/08/08/Centos%207%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E8%AF%AD%E8%A8%80/"/>
+      <url>/2018/08/08/Centos%207%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E8%AF%AD%E8%A8%80/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要：</strong> centos7 系统下修改系统语言有两种办法</p><ol><li><p>临时修改：</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=“zh_CN.UTF-8”</span><br></pre></td></tr></table></figure></li><li><p>永久修改</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/locale.conf //在文件中插入 LANG=“zh_CN.UTF-8”</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>centos7 升级内核</title>
+      <link href="/2018/07/24/centos7%20%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8/"/>
+      <url>/2018/07/24/centos7%20%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8/</url>
+      
+        <content type="html"><![CDATA[<p>其实本身想到升级内核是为了能够开启BBR进而对网速进行加速，但不知何故，网上的各种一键脚本都卡在了更换内核的步骤上，主要症状表现为：</p><ol><li>新内核的确被安装了</li><li>直接reboot命令重启，依然会进入旧内核</li><li>通过VNC连接，手动选择新内核进行启动，则会启动失败.</li></ol><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>研究了网上的几篇文章，发现问题主要出在没有编译内核启动文件上，为了以后遇到相似的情况可以迅速找到解决办法，撰本篇博文以记录：</p><pre><code>#使用cat /boot/grub2/grub.cfg |grep menuentry  查看系统可用内核#这是我的输出内容，引号之间为内核名if [ x&quot;${feature_menuentry_id}&quot; = xy ]; thenmenuentry_id_option=&quot;--id&quot;menuentry_id_option=&quot;&quot;export menuentry_id_optionmenuentry&apos;CentOS Linux (4.11.8-1.el7.elrepo.x86_64) 7 (Core)&apos; --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option  &apos;gnulinux-simple-LABEL=root&apos; {menuentry &apos;CentOS Linux&apos; --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &apos;gnulinux-simple-LABEL=root&apos; {submenu &apos;Advanced options for CentOS Linux&apos; $menuentry_id_option &apos;gnulinux-advanced-LABEL=root&apos; {menuentry &apos;CentOS Linux, with Linux 3.10.0-123.4.4.el7.x86_64&apos; --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &apos;gnulinux-3.10.0-123.4.4.el7.x86_64-advanced-LABEL=root&apos; {menuentry &apos;CentOS Linux, with Linux 3.10.0-123.4.4.el7.x86_64 (recovery mode)&apos; --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option &apos;gnulinux-3.10.0-123.4.4.el7.x86_64-recovery-LABEL=root&apos; {</code></pre><p>安装新内核后，需要使用以下命令修改内核配置文件</p><pre><code>vi /etc/default/grub</code></pre><p>将第一行内容修改为</p><pre><code>GRUB_DEFAULT=0 #或者其他内核，内核名参加上面</code></pre><p>之后，重新编译内核启动文件</p><pre><code>grub2-mkconfig -o /boot/grub2/grub.cfg</code></pre><h2 id="错误排除"><a href="#错误排除" class="headerlink" title="错误排除"></a>错误排除</h2><ol><li>/boot/grub2/grub.cfg不存在（grub2-mkconfig: command not found）<ol><li>打开grub.conf <code>shell vi /etc/grub.conf</code></li><li>将default=0修改为default=1（具体取决于希望使用的内核在列表中的顺序）</li></ol></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux &amp;amp; VPS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+  
+  
+    
+    
+    <entry>
+      <title></title>
+      <link href="/hexo-admin-ehc-images.json"/>
+      <url>/hexo-admin-ehc-images.json</url>
+      
+        <content type="html"><![CDATA[[{"name":"DASHENG-900x700-1.png","date":1518959551960},{"name":"DASHENG-900x700-2.png","date":1518959599098},{"name":"DASHENG-900x700-3.png","date":1518959609913},{"name":"DASHENG-900x700-4.png","date":1518959618105}]]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于</title>
+      <link href="/e5-85-b3-e4-ba-8e/index.html"/>
+      <url>/e5-85-b3-e4-ba-8e/index.html</url>
+      
+        <content type="html"><![CDATA[<p>目前好像也没有什么好说的，大概是兴趣所致，做一个博客玩玩吧，至于能不能走下去，日后再说。</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客</title>
+      <link href="/e5-8d-9a-e5-ae-a2/index.html"/>
+      <url>/e5-8d-9a-e5-ae-a2/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>联系</title>
+      <link href="/e8-81-94-e7-b3-bb-2/index.html"/>
+      <url>/e8-81-94-e7-b3-bb-2/index.html</url>
+      
+        <content type="html"><![CDATA[<p>[contact-form-7 id=”85” title=”联系表单 1”]</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vps常用性能检测脚本</title>
+      <link href="/vps/index.html"/>
+      <url>/vps/index.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="superbench"><a href="#superbench" class="headerlink" title="superbench"></a>superbench</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- git.io/superbench.sh | bash</span><br></pre></td></tr></table></figure><h2 id="memtest测试内存可用量"><a href="#memtest测试内存可用量" class="headerlink" title="memtest测试内存可用量"></a>memtest测试内存可用量</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/oooldking/script/master/superbench.sh </span><br><span class="line">chmod +x superbench.sh </span><br><span class="line">./superbench.sh</span><br></pre></td></tr></table></figure><h2 id="Zbench"><a href="#Zbench" class="headerlink" title="Zbench"></a>Zbench</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZBench-CN.sh &amp;&amp; bash ZBench-CN.sh</span><br></pre></td></tr></table></figure><h2 id="Linux性能测试UnixBench一键脚本"><a href="#Linux性能测试UnixBench一键脚本" class="headerlink" title="Linux性能测试UnixBench一键脚本"></a>Linux性能测试UnixBench一键脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/unixbench.sh </span><br><span class="line">chmod +x unixbench.sh </span><br><span class="line">./unixbench.sh</span><br></pre></td></tr></table></figure><h2 id="94ish版TCP加速脚本"><a href="#94ish版TCP加速脚本" class="headerlink" title="94ish版TCP加速脚本"></a>94ish版TCP加速脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate <span class="string">"https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh"</span></span><br><span class="line">chmod +x tcp.sh</span><br><span class="line">./tcp.sh</span><br></pre></td></tr></table></figure><h2 id="SuperSpeed全面测速脚本"><a href="#SuperSpeed全面测速脚本" class="headerlink" title="SuperSpeed全面测速脚本"></a>SuperSpeed全面测速脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -Lso- https://git.io/superspeed)</span><br></pre></td></tr></table></figure><h2 id="Yet-Another-Bench-Script"><a href="#Yet-Another-Bench-Script" class="headerlink" title="Yet-Another-Bench-Script"></a>Yet-Another-Bench-Script</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/masonr/yet-another-bench-script/master/yabs.sh | bash</span><br></pre></td></tr></table></figure><h2 id="Speedtest-Monster"><a href="#Speedtest-Monster" class="headerlink" title="Speedtest Monster"></a>Speedtest Monster</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LsO bench.monster/speedtest.sh; bash speedtest.sh -Asia</span><br></pre></td></tr></table></figure><h2 id="Nench"><a href="#Nench" class="headerlink" title="Nench"></a>Nench</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(curl -s wget.racing/nench.sh | bash; curl -s wget.racing/nench.sh | bash) 2&gt;&amp;1 | tee nench.log</span><br></pre></td></tr></table></figure>]]></content>
+      
+    </entry>
+    
+    
+  
+</search>
