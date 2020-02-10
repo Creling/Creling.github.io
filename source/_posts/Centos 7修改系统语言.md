@@ -1,0 +1,19 @@
+title: Centos 7修改系统语言
+url: 178.html
+id: 178
+categories:
+  - Linux &amp; VPS
+date: 2018-08-08 11:45:11
+tags:
+---
+**摘要：** centos7 系统下修改系统语言有两种办法
+
+1. 临时修改：
+    ```shell
+    LANG=“zh_CN.UTF-8”
+    ```
+
+2. 永久修改
+    ```shell
+    vi /etc/locale.conf //在文件中插入 LANG=“zh_CN.UTF-8”
+    ```

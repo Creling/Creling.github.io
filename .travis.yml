@@ -1,0 +1,19 @@
+sudo: false
+language: node_js
+node_js:
+  - 10 # use nodejs v10 LTS
+cache: npm
+branches:
+  only:
+    - hexoFolder # build master branch only
+script:
+  - hexo generate # generate static files
+deploy:
+  provider: pages
+  skip-cleanup: true 
+  github_token: $GITHUB_TOKEN
+  keep-history: true
+  target_branch: master
+  on:
+    branch: hexoFolder
+  local_dir: public
