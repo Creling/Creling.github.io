@@ -672,9 +672,20 @@
     
     
     <entry>
+      <title>vps常用性能检测脚本</title>
+      <link href="/vps/index.html"/>
+      <url>/vps/index.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="superbench"><a href="#superbench" class="headerlink" title="superbench"></a>superbench</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- git.io/superbench.sh | bash</span><br></pre></td></tr></table></figure><h2 id="memtest测试内存可用量"><a href="#memtest测试内存可用量" class="headerlink" title="memtest测试内存可用量"></a>memtest测试内存可用量</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/oooldking/script/master/superbench.sh </span><br><span class="line">chmod +x superbench.sh </span><br><span class="line">./superbench.sh</span><br></pre></td></tr></table></figure><h2 id="Zbench"><a href="#Zbench" class="headerlink" title="Zbench"></a>Zbench</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZBench-CN.sh &amp;&amp; bash ZBench-CN.sh</span><br></pre></td></tr></table></figure><h2 id="Linux性能测试UnixBench一键脚本"><a href="#Linux性能测试UnixBench一键脚本" class="headerlink" title="Linux性能测试UnixBench一键脚本"></a>Linux性能测试UnixBench一键脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/unixbench.sh </span><br><span class="line">chmod +x unixbench.sh </span><br><span class="line">./unixbench.sh</span><br></pre></td></tr></table></figure><h2 id="94ish版TCP加速脚本"><a href="#94ish版TCP加速脚本" class="headerlink" title="94ish版TCP加速脚本"></a>94ish版TCP加速脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate <span class="string">"https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh"</span></span><br><span class="line">chmod +x tcp.sh</span><br><span class="line">./tcp.sh</span><br></pre></td></tr></table></figure><h2 id="SuperSpeed全面测速脚本"><a href="#SuperSpeed全面测速脚本" class="headerlink" title="SuperSpeed全面测速脚本"></a>SuperSpeed全面测速脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -Lso- https://git.io/superspeed)</span><br></pre></td></tr></table></figure><h2 id="Yet-Another-Bench-Script"><a href="#Yet-Another-Bench-Script" class="headerlink" title="Yet-Another-Bench-Script"></a>Yet-Another-Bench-Script</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/masonr/yet-another-bench-script/master/yabs.sh | bash</span><br></pre></td></tr></table></figure><h2 id="Speedtest-Monster"><a href="#Speedtest-Monster" class="headerlink" title="Speedtest Monster"></a>Speedtest Monster</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LsO bench.monster/speedtest.sh; bash speedtest.sh -Asia</span><br></pre></td></tr></table></figure><h2 id="Nench"><a href="#Nench" class="headerlink" title="Nench"></a>Nench</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(curl -s wget.racing/nench.sh | bash; curl -s wget.racing/nench.sh | bash) 2&gt;&amp;1 | tee nench.log</span><br></pre></td></tr></table></figure>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于</title>
-      <link href="/e5-85-b3-e4-ba-8e/index.html"/>
-      <url>/e5-85-b3-e4-ba-8e/index.html</url>
+      <link href="/%E5%85%B3%E4%BA%8E/index.html"/>
+      <url>/%E5%85%B3%E4%BA%8E/index.html</url>
       
         <content type="html"><![CDATA[<p>目前好像也没有什么好说的，大概是兴趣所致，做一个博客玩玩吧，至于能不能走下去，日后再说。</p>]]></content>
       
@@ -683,33 +694,11 @@
     
     
     <entry>
-      <title>博客</title>
-      <link href="/e5-8d-9a-e5-ae-a2/index.html"/>
-      <url>/e5-8d-9a-e5-ae-a2/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>联系</title>
-      <link href="/e8-81-94-e7-b3-bb-2/index.html"/>
-      <url>/e8-81-94-e7-b3-bb-2/index.html</url>
+      <link href="/%E8%81%94%E7%B3%BB/index.html"/>
+      <url>/%E8%81%94%E7%B3%BB/index.html</url>
       
         <content type="html"><![CDATA[<p>[contact-form-7 id=”85” title=”联系表单 1”]</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>vps常用性能检测脚本</title>
-      <link href="/vps/index.html"/>
-      <url>/vps/index.html</url>
-      
-        <content type="html"><![CDATA[<h2 id="superbench"><a href="#superbench" class="headerlink" title="superbench"></a>superbench</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- git.io/superbench.sh | bash</span><br></pre></td></tr></table></figure><h2 id="memtest测试内存可用量"><a href="#memtest测试内存可用量" class="headerlink" title="memtest测试内存可用量"></a>memtest测试内存可用量</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/oooldking/script/master/superbench.sh </span><br><span class="line">chmod +x superbench.sh </span><br><span class="line">./superbench.sh</span><br></pre></td></tr></table></figure><h2 id="Zbench"><a href="#Zbench" class="headerlink" title="Zbench"></a>Zbench</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZBench-CN.sh &amp;&amp; bash ZBench-CN.sh</span><br></pre></td></tr></table></figure><h2 id="Linux性能测试UnixBench一键脚本"><a href="#Linux性能测试UnixBench一键脚本" class="headerlink" title="Linux性能测试UnixBench一键脚本"></a>Linux性能测试UnixBench一键脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/unixbench.sh </span><br><span class="line">chmod +x unixbench.sh </span><br><span class="line">./unixbench.sh</span><br></pre></td></tr></table></figure><h2 id="94ish版TCP加速脚本"><a href="#94ish版TCP加速脚本" class="headerlink" title="94ish版TCP加速脚本"></a>94ish版TCP加速脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate <span class="string">"https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh"</span></span><br><span class="line">chmod +x tcp.sh</span><br><span class="line">./tcp.sh</span><br></pre></td></tr></table></figure><h2 id="SuperSpeed全面测速脚本"><a href="#SuperSpeed全面测速脚本" class="headerlink" title="SuperSpeed全面测速脚本"></a>SuperSpeed全面测速脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -Lso- https://git.io/superspeed)</span><br></pre></td></tr></table></figure><h2 id="Yet-Another-Bench-Script"><a href="#Yet-Another-Bench-Script" class="headerlink" title="Yet-Another-Bench-Script"></a>Yet-Another-Bench-Script</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/masonr/yet-another-bench-script/master/yabs.sh | bash</span><br></pre></td></tr></table></figure><h2 id="Speedtest-Monster"><a href="#Speedtest-Monster" class="headerlink" title="Speedtest Monster"></a>Speedtest Monster</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LsO bench.monster/speedtest.sh; bash speedtest.sh -Asia</span><br></pre></td></tr></table></figure><h2 id="Nench"><a href="#Nench" class="headerlink" title="Nench"></a>Nench</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(curl -s wget.racing/nench.sh | bash; curl -s wget.racing/nench.sh | bash) 2&gt;&amp;1 | tee nench.log</span><br></pre></td></tr></table></figure>]]></content>
       
     </entry>
     
