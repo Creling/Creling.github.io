@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>通过Travis-CI自动部署GitHub Pages</title>
+      <link href="/2020/02/11/%E9%80%9A%E8%BF%87travis-ci%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2GitHub%20Pages/"/>
+      <url>/2020/02/11/%E9%80%9A%E8%BF%87travis-ci%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2GitHub%20Pages/</url>
+      
+        <content type="html"><![CDATA[<p><strong>摘要：</strong> 将Hexo博客部署在Github Pages上并通过Travis-CI进行持续集成和持续部署</p><a id="more"></a><h2 id="1-整体思路"><a href="#1-整体思路" class="headerlink" title="1. 整体思路"></a>1. 整体思路</h2><p>想要实现如标题所述的自动部署和发布，实际上有两种思路，各有优缺，分别记录如下：</p><ol><li>依靠Travis-CI持续集成，依靠Travis-CI的GitHub page组件持续部署<br> 这种思路需要一个repository和它的两个branch。<br> 将hexo安装目录推送到branch A，通过Travis-CI运行<code>hexo g</code>命令生成public文件夹，再通过Travis-CI将生成的public文件夹推送到branch B，Github Pages以branch B作为数据源。<br> 优点是设置时相对较方便</li><li>依靠Travis-CI持续集成，依靠Hexo的hexo-deploy-git插件持续部署<br> 这种思路需要两个repository，每个repository分别需要一个branch。</li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>救援模式下挂载原系统</title>
       <link href="/2020/01/27/%E6%95%91%E6%8F%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%8C%82%E8%BD%BD%E5%8E%9F%E7%B3%BB%E7%BB%9F/"/>
       <url>/2020/01/27/%E6%95%91%E6%8F%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%8C%82%E8%BD%BD%E5%8E%9F%E7%B3%BB%E7%BB%9F/</url>
